@@ -6,8 +6,10 @@ war:-
     menu(QtdJogF, QtdBotsF),
     QtdJog is QtdJogF + QtdBotsF,
     posicionamento_inicial(QtdJog, NovoMapa),
-    atribuir_objetivos(QtdJog, Objetivos), nl,
+    mostrarObjetivos:retornaObjetivo(1, Objetivo),
+    atribuir_objetivos(QtdJog, Objetivos),
+    write(Objetivos), nl,
+    write(Objetivo), nl,
     write(QtdJogF), nl,
     write(QtdBotsF), nl,
-    write(NovoMapa), nl,
-    write(Objetivos).
+    write(NovoMapa).

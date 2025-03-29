@@ -1,6 +1,8 @@
-:- module(mostrarObjetivos, [atribuir_objetivos/2]).
+:- module(mostrarObjetivos, [retornaObjetivo/2, atribuir_objetivos/2]).
 :- use_module(library(readutil)).
 :- use_module(library(random)).
+
+objetivos([1,2,3,4,5,6]).
 
 retornaObjetivo(Indice, Objetivo):-
     Objetivos = [
@@ -33,7 +35,8 @@ distribuir_objetivos([H|T], Indice) :-
     format('Pressione ENTER para verificar o objetivo do Jogador ~w.~n', [Indice]),
     get_char(_),
     limpar_tela,
-    format('Objetivo do Jogador ~w: ~w~n', [Indice, H]), nl,
+    retornaObjetivo(H, Obj),
+    format('Objetivo do Jogador ~w: ~w~n', [Indice, Obj]), nl,
     write("Pressione ENTER"), 
     get_char(_),
     limpar_tela,
