@@ -1,3 +1,4 @@
+:- module(distribuicaoTerritorios, [posicionamento_inicial/2]).
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
@@ -32,7 +33,7 @@ determinaJogador(Qtd, Ind, R):-
 
 determinaJogadorRec(Qtd, Idc, Njogador, R):-
     Nterr is 24//Qtd,
-    (Nterr* Njogador >= Idc -> R = Njogador, !; Njogador1 is Njogador+1, determinaJogadorRec(Qtd, Idc, Njogador1, R)).
+    (Nterr*Njogador >= Idc -> R = Njogador; Njogador1 is Njogador+1, determinaJogadorRec(Qtd, Idc, Njogador1, R)).
 
 main :-
     write('Teste de embaralhamento de territórios...'), nl,
@@ -46,8 +47,6 @@ main :-
     substituirSublista(MapaInicial, 4, [1, 1], MapaSubstituido),
     write('Mapa após substituição: '), write(MapaSubstituido), nl,
 
-    determinaJogador(2, 0, R),
-    write(R),
     
     write('Teste de distribuição de territórios...'), nl,
     % Teste da função de distribuição de territórios
