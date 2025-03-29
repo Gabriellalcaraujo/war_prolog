@@ -2,8 +2,8 @@
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
-
-objetivos([
+retornaObjetivo(Indice, Objetivo):-
+    Objetivos = [
     "Conquistar QUATORZE TERRITORIOS a sua escolha.",
     "Conquistar DOZE TERRITORIOS a sua escolha e ocupar cada um deles com pelo menos dois exercitos.",
     "Conquistar na totalidade a AMERICA e a OCEANIA.",
@@ -11,7 +11,8 @@ objetivos([
     "Conquistar na totalidade a EUROPA, a OCEANIA e a AFRICA.",
     "Conquistar na totalidade a AMERICA e a EUROPA.",
     "Seu objetivo e fazer com que o JOGADOR 2 seja ELIMINADO. Caso voce seja o jogador dois, seu objetivo passa a ser conquistar QUATORZE TERRITORIOS a sua escolha."
-]).
+    ],
+    nth1(Indice, Objetivos, Objetivo). 
 
 embaralhar_objetivos(Shuffled) :-
     objetivos(List),
@@ -44,5 +45,3 @@ limpar_tela :-
     flush_output.
 
 
-
-     
