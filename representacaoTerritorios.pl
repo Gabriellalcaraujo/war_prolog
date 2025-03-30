@@ -110,7 +110,7 @@ imprime_mapa_colorido(Mapa) :-
     write("⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿"), 
 
     nth0(4, Mapa, [J19, E19]), % mx 
-    imprime_siglas_colorido(E19, 5),
+    imprime_siglas_colorido(J19, 5),
     write("⣿⣿⣿⣿⣿"),
 
     % numero de ny 
