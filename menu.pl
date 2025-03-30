@@ -7,8 +7,7 @@ validaJogadores(QtdJog):-
 
 maxBots(QtdJog, R):- R is 4-QtdJog. 
 
-validaBots(QtdBots, Q):- validaJogadores(QtdBots), QtdBots =< Q.
-
+validaBots(QtdBots, Q):- QtdBots >= 0, QtdBots =< Q.
 
 menu(QtdJogF, QtdBotsF):-
     format("Voce deseja comecar um novo jogo (0) ou continuar um jogo salvo (1)?"),nl,
@@ -24,11 +23,13 @@ menu(QtdJogF, QtdBotsF):-
     atom_string(AtomQtdJog, StringQ),
     atom_number(AtomQtdJog, QtdJog),
     (validaJogadores(QtdJog) -> QtdJogF = QtdJog; write("Entrada Invalida! :("), nl, fail),
-    maxBots(QtdJog, R),
-    repeat,
-    format("Quantos bots seu jogo tera? (~w)~n", [R]),
-    read_line_to_codes(user_input, QB),
-    string_codes(StringQB, QB),
-    atom_string(AtomQtdBots, StringQB),
-    atom_number(AtomQtdBots, QtdBots),
-    (validaBots(QtdBots, R) -> QtdBotsF = QtdBots; (write("Entrada Invalida! :("), nl, fail)).
+    (QtdJog = 4 -> QtdBotsF = 0;  % Se forem 4 jogadores, define 0 bots e não pergunta  
+        (maxBots(QtdJog, R),  
+        repeat,  
+        format("Quantos bots seu jogo tera? (0 a ~w)~n", [R]),  
+        read_line_to_codes(user_input, QB),  
+        string_codes(StringQB, QB),  
+        atom_string(AtomQtdBots, StringQB),  
+        atom_number(AtomQtdBots, QtdBots),  
+        (validaBots(QtdBots, R) -> QtdBotsF = QtdBots; (write("Entrada Invalida! :("), nl, fail)))  
+    ).  
