@@ -30,208 +30,214 @@ imprime_mapa_colorido(Mapa) :-
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣄⣠⣀⡀⣀⣠⣤⣤⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣄⢠⣠⣼⣿⣿⣿⣟⣿⣿⣿⣿"),
 
-    nth0(2, Mapa, [J1, E1]),
+    nth0(2, Mapa, [J1, E1]), % gl
     imprime_siglas_colorido(J1, 3),
     write("⣿⣿⡿⠋⠀⠀⠀⢠⣤⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⢦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"), nl,
     write("*⠀⠀⠀⠀⠀⠀⠀⣼⣿⣟⣾⣿⣽⣿⣿⣅⠈⠉⠻⣿"),
 
     imprime_numero_colorido(J1, E1),
     write("⣿⡿⠇*⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⢀⡶⠒⢉⡀⢠⣤⣶⣶⣿⣷⣆⣀⡀⠀⢲⣖⠒⠀⠀⠀⠀⠀⠀*"), nl,
-    write("⢀⣤⣾⣶⣦⣤⣤⣶⣿⣿⣿⣿⣿⣿⣽⡿⠻⣷⣀⠀⢻⣿⣿⣿⡿⠟⠀ * ⠀⠀⣤⣶⣶⣤⣀⣀⣬⣷⣦⣿⣿⣿⣿⣿⣿⣿").
+    write("⢀⣤⣾⣶⣦⣤⣤⣶⣿⣿⣿⣿⣿⣿⣽⡿⠻⣷⣀⠀⢻⣿⣿⣿⡿⠟⠀ * ⠀⠀⣤⣶⣶⣤⣀⣀⣬⣷⣦⣿⣿⣿⣿⣿⣿⣿"),
 
-    nth0(16, Mapa, [J3, E3]),
+    nth0(16, Mapa, [J3, E3]), % si 
     imprime_siglas_colorido(J3, 17),
     write("⣿⣿⣿⣿⣿⣿⣶⣦⣤⣦⣼⣀⠀"), nl,
     write("⠈⣿"),
 
-    nth0(0, Mapa, [J4, E4]),
+    nth0(0, Mapa, [J4, E4]), % al
     imprime_siglas_colorido(J4, 1),
     write("⣿⣿⣿⣿⣿⣿"),
 
-    nth0(1, Mapa, [J5, E5]),
+    nth0(1, Mapa, [J5, E5]), % na / ca 
     imprime_siglas_colorido(J5, 2),
     write("⣿⣿⡿⠛⠓⣿⣿⠟⠁⠘⣿⡟⠁⠀⠘⠛⠁⠀*⢠⣾⣿⢿⣿⣿⣿⣿"),
 
-    nth0(9, Mapa, [J6, E6]),
+    nth0(9, Mapa, [J6, E6]), % sp 
     imprime_siglas_colorido(J6, 10),
     write("⣿⣿⣿⣿⣿⣿⣿"), nl,
 
-    nth0(16, Mapa, [J7, E7]),
-    imprime_numero_colorido(E7, 17),
+   % numero de si 
+    imprime_numero_colorido(J3, E3),
     write("⣿⣿⣿⣿"),
 
-    nth0(17, Mapa, [J8, E8]),
-    imprime_siglas_colorido(E8, 18),
-    write("⣿⣿⣿⡿⠏⠙⠁"),
+    nth0(17, Mapa, [J8, E8]), % vl 
+    imprime_siglas_colorido(J8, 18),
+    write("⣿⣿⣿⡿⠏⠙⠁"), nl, 
     write(" ⠸"),
 
-    nth0(0, Mapa, [J9, E9]),
-    imprime_numero_colorido(J9, E9),
+    % numero de al 
+    imprime_numero_colorido(J4, E4),
     write("⠈⠙⣿⣿⣿"),
 
-    nth0(1, Mapa, [J10, E10]),
-    imprime_numero_colorido(J10, E10),
+
+    % numero de na 
+    imprime_numero_colorido(J5, E5),
     write("⣿⣷⣦⡄⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀"),
 
-    nth0(7, Mapa, [J11, E11]),
-    imprime_siglas_colorido(E11, 8),
+    nth0(7, Mapa, [J11, E11]), % uk 
+    imprime_siglas_colorido(J11, 8),
     write("⣆⢘"),
 
-    nth0(8, Mapa, [J12, E12]),
-    imprime_siglas_colorido(E12, 9),
+    nth0(8, Mapa, [J12, E12]), % ge 
+    imprime_siglas_colorido(J12, 9),
     write("⣼⣿⣿⣿⣿"), 
 
-    nth0(9, Mapa, [J13, E13]),
-    imprime_numero_colorido(J13, E13),
+    % numero de sp
+    imprime_numero_colorido(J6, E6),
     write("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"),
 
-    nth0(17, Mapa, [J14, E14]),
-    imprime_numero_colorido(J14, E14),
-    write("⡿⠀⠀⠀⠀⠀"),
+    % numero de vl 
+    imprime_numero_colorido(J8, E8), 
+    write("⡿⠀⠀⠀⠀⠀"), nl, 
     write("⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿"),
 
-    nth0(3, Mapa, [J15, E15]),
-    imprime_siglas_colorido(E15, 4),
+    nth0(3, Mapa, [J15, E15]), % ny 
+    imprime_siglas_colorido(J15, 4),
     write("⠦⠀⠀⠀⠀⠀"), 
 
-    nth0(7, Mapa, [J16, E16]),
-    imprime_numero_colorido(J16, E16),
+    % numero uk 
+    imprime_numero_colorido(J11, E11),
     write("⣿⣿"),
 
-    nth0(8, Mapa, [J17, E17]),
-    imprime_numero_colorido(J17, E17),
+    % numero de ge 
+    imprime_numero_colorido(J12, E12),
     write("⣿⣿⣿⣿⣿⣿⣿⣿⣿"),
 
-    nth0(15, Mapa, [J18, E18]),
-    imprime_siglas_colorido(E18, 16),
-    write("⣿⣿⣿⣿⣿⡿⡗⠀⠈*     "),
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿"), nl,
+    nth0(15, Mapa, [J18, E18]), % mo 
+    imprime_siglas_colorido(J18, 16),
+    write("⣿⣿⣿⣿⣿⡿⡗⠀⠈*     "), nl,
+    write("⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿"), 
 
-    nth0(4, Mapa, [J19, E19]),
+    nth0(4, Mapa, [J19, E19]), % mx 
     imprime_siglas_colorido(E19, 5),
     write("⣿⣿⣿⣿⣿"),
 
-    nth0(3, Mapa, [J20, E20]),
-    imprime_numero_colorido(J20, E20),
+    % numero de ny 
+    imprime_numero_colorido(J15, E15),
     write("⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣉⣿⡿⢿⢷⣾"),
 
-    nth0(10, Mapa, [J21, E21]),
-    imprime_siglas_colorido(E21, 11),
+    nth0(10, Mapa, [J21, E21]), % tu 
+    imprime_siglas_colorido(J21, 11),
     write("⣞⣿⣿"),
 
-    nth0(15, Mapa, [J22, E22]),
-    imprime_numero_colorido(J22, E22),
+    % numero de mo 
+    imprime_numero_colorido(J18, E18),
     write("⣿⣿"),
 
-    nth0(18, Mapa, [J23, E23]),
-    imprime_siglas_colorido(E23, 19),
+    nth0(18, Mapa, [J23, E23]), % ch 
+    imprime_siglas_colorido(J23, 19),
     write("⣿⣿⣿⠋⣠⠟"),
 
-    nth0(19, Mapa, [J24, E24]),
-    imprime_siglas_colorido(E24, 20),
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿"),
+    nth0(19, Mapa, [J24, E24]), % jp 
+    imprime_siglas_colorido(J24, 20),
+    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿"), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿"),
 
-    nth0(4, Mapa, [J25, E25]),
-    imprime_numero_colorido(J25, E25),
+    % numero de mx 
+    imprime_numero_colorido(J19, E19),
     write("⠿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣾⣿⣿⣷⣦⣶⣦⣼⣿"),
 
-    nth0(10, Mapa, [J26, E26]),
+    nth0(11, Mapa, [J26, E26]), % mr 
     imprime_numero_colorido(J26, E26),
-    write("⣞⣿⣿⣿⣿⣿"),
+    write("⣷⣦⣶⣦⣼⣿"),
 
-    nth0(18, Mapa, [J27, E27]),
-    imprime_numero_colorido(J27, E27),
-    write("⣿⣷⠈⠛⠁"),
+    % numero tu 
+    imprime_numero_colorido(J21, E21),
+    write("⣿⣿⣿⣿⣿⣿⣿"),
 
-    nth0(19, Mapa, [J28, E28]),
-    imprime_numero_colorido(J28, E28),
-    write("     "), nl,
+    % numero ch
+    imprime_numero_colorido(J23, E23),
+    write("⣿⣷⠈⠛⠁"), 
+
+    % numero jp 
+    imprime_numero_colorido(J24, E24),
+    write("       "), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣤⡖⠛⠶⠤⡀⠀⠀⠀⠀⠀⠀⠀⢰⣿"),
 
-    nth0(11, Mapa, [J29, E29]),
-    imprime_siglas_colorido(E29, 12),
-    write("⣿⣿⣿"), 
+    % numero de mr 
+    imprime_numero_colorido(J26, E26),
+    write("⣿⣿"),
 
-    nth0(12, Mapa, [J30, E30]),
-    imprime_siglas_colorido(E30, 13),
-    write("⣿⣿⣿⣿⡿⠁⠙⣿⣿⠿⢻⣿⣿⡿⠋⢩⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"), 
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠧⣤⣦⣤⣄⡀⠀⠀⠀ * ⠘"),
+    nth0(12, Mapa, [J30, E30]), % eg 
+    imprime_siglas_colorido(J30, 13),
+    write("⣿⣿⣿⣿⡿⠁⠙⣿⣿⠿⢻⣿⣿⡿⠋⢩⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"), nl,
+    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠧⣤⣦⣤⣄⡀⠀⠀⠀ * ⠘⣿⣿⣿⣿⣿"),
 
-    nth0(11, Mapa, [J31, E31]),
-    imprime_numero_colorido(J31, E31),
-    write("⣿⣿⣿"),
-
-    nth0(12, Mapa, [J32, E32]),
-    imprime_numero_colorido(J32, E32),
+    % numero eg 
+    imprime_numero_colorido(J30, E30),
     write("⣿⣿⡇⠀⠀⠀"),
 
-    nth0(20, Mapa, [J33, E33]),
-    imprime_siglas_colorido(E33, 21),
+    nth0(20, Mapa, [J33, E33]), % in 
+    imprime_siglas_colorido(J33, 21),
     write("⠀⠈⣹"), 
 
-    nth0(21, Mapa, [J34, E34]),
-    imprime_siglas_colorido(E34, 22),
+    nth0(21, Mapa, [J34, E34]), % vi 
+    imprime_siglas_colorido(J34, 22),
     write( "⢀⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿"),
 
-    nth0(5, Mapa, [J35, E35]),
-    imprime_siglas_colorido(E35, 6),
+    nth0(5, Mapa, [J35, E35]), % br
+    imprime_siglas_colorido(J35, 6),
     write("⣤⣀⡀*    ⠀⠈⢽⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀"),
 
-    nth0(21, Mapa, [J36, E36]),
-    imprime_numero_colorido(J36, E36),
-    write("⣿⣷⢲⣦⣤⡀⢀⡀⠀⠀⠀⠀⠀⠀"), nl,
+    % numero in 
+    imprime_numero_colorido(J33, E33),
+    write(" "),
+
+    % numero vi
+    imprime_numero_colorido(J34, E34),
+    write("⢀⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿"),
 
-    nth0(5, Mapa, [J37, E37]),
-    imprime_numero_colorido(J37, E37),
-    write("⣿⠟⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣷"), 
+    % numero br 
+    imprime_numero_colorido(J35, E35),
+    write("⣿⠟⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣷"),
 
-    nth0(14, Mapa, [J38, E38]),
-    imprime_siglas_colorido(E38, 15),
+    nth0(14, Mapa, [J38, E38]), % ma 
+    imprime_siglas_colorido(J38, 15),
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠂⠛⣆⣤⡜⣟⠋⠙⠂⠀⠀⠀⠀"), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹"),
-
-    nth0(6, Mapa, [J39, E39]),
-    imprime_siglas_colorido(E39, 7),
+    
+    nth0(6, Mapa, [J39, E39]), % ar
+    imprime_siglas_colorido(J39, 7), 
     write("⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀ ⠘⣿"),
 
-    nth0(13, Mapa, [J40, E40]),
-    imprime_siglas_colorido(E40, 14),
+    nth0(13, Mapa, [J40, E40]), % sa 
+    imprime_siglas_colorido(J40, 14), 
     write("⣿⠉"),
 
-    nth0(14, Mapa, [J41, E41]),
-    imprime_numero_colorido(J41, E41),
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣾⣿"), 
+    % numero de ma 
+    imprime_numero_colorido(J38, E38),
+    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣾⣿"),
 
-    nth0(22, Mapa, [J42, E42]),
-    imprime_siglas_colorido(E42, 23),
+    nth0(22, Mapa, [J42, E42]), % au 
+    imprime_siglas_colorido(J42, 23),
     write("⣿⣆⠀⠰⠄⠀⠉⠀⠀" ), nl,
     write("                 "),
 
-    nth0(6, Mapa, [J43, E43]),
-    imprime_numero_colorido(J43, E43),
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣾⣿"),
+    % numero de ar 
+    imprime_numero_colorido(J39, E39),
+    write("⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀   "),
 
-    nth0(13, Mapa, [J44, E44]),
-    imprime_numero_colorido(J44, E44),
+    % numero de sa 
+    imprime_numero_colorido(J40, E40),
     write("⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿"), 
- 
-    nth0(22, Mapa, [J45, E45]),
-    imprime_numero_colorido(J45, E45),
-    write("⣿⣿⠇*"), 
 
-    nth0(23, Mapa, [J46, E46]),
-    imprime_siglas_colorido(E46, 24),
+    % numero de au 
+    imprime_numero_colorido(J42, E42),
+    write("⣿⣿⠇*"),
+
+    nth0(23, Mapa, [J46, E46]), % nz
+    imprime_siglas_colorido(J46, 24),
     write("   "), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡿⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⡇⠀"),
 
-    nth0(23, Mapa, [J47, E47]),
-    imprime_numero_colorido(J47, E47),
+    % numero de nz 
+    imprime_numero_colorido(J46, E46),
     write("⣼⠗⠀⠀"), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠃⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠙⠁⠀⠀"), nl,
     write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠒⠀⠀"), nl.
+
 
 
  
