@@ -23,7 +23,7 @@ menu(QtdJogF, QtdBotsF):-
     atom_string(AtomQtdJog, StringQ),
     atom_number(AtomQtdJog, QtdJog),
     (validaJogadores(QtdJog) -> QtdJogF = QtdJog; write("Entrada Invalida! :("), nl, fail),
-    (QtdJog = 4 -> QtdBotsF = 0;  % Se forem 4 jogadores, define 0 bots e não pergunta  
+    (QtdJog = 4 -> QtdBotsF = 0; 
         (maxBots(QtdJog, R),  
         repeat,  
         format("Quantos bots seu jogo tera? (0 a ~w)~n", [R]),  
