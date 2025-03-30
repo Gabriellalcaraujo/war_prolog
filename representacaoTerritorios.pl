@@ -23,7 +23,8 @@ imprime_numero_colorido(Jogador, Numero) :-
     define_cor(Jogador),
     % format_number(Numero, NumeroFormatado),
     % write(NumeroFormatado),
-    write(Numero),
+    % write(Numero),
+    format('~|~`0t~d~3+', [Numero]),
     reset_color.
 
 imprime_mapa_colorido(Mapa) :-
@@ -54,7 +55,7 @@ imprime_mapa_colorido(Mapa) :-
 
     nth0(9, Mapa, [J6, E6]), % sp 
     imprime_siglas_colorido(J6, 10),
-    write("⣿⣿⣿⣿⣿⣿⣿"), nl,
+    write("⣿⣿⣿⣿⣿⣿⣿"),
 
    % numero de si 
     imprime_numero_colorido(J3, E3),
@@ -130,16 +131,16 @@ imprime_mapa_colorido(Mapa) :-
 
     nth0(19, Mapa, [J24, E24]), % jp 
     imprime_siglas_colorido(J24, 20),
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿"), nl,
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿"),
+    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀  "), nl,
+    write("        ⠹⣿⣿ "),
 
     % numero de mx 
     imprime_numero_colorido(J19, E19),
-    write("⠿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣾⣿⣿⣷⣦⣶⣦⣼⣿"),
+    write("⠿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣼⣿"),
 
     nth0(11, Mapa, [J26, E26]), % mr 
-    imprime_numero_colorido(J26, E26),
-    write("⣷⣦⣶⣦⣼⣿"),
+    imprime_siglas_colorido(J26, 12),
+    write("⣷⣦⣼⣿⣿"),
 
     % numero tu 
     imprime_numero_colorido(J21, E21),

@@ -1,7 +1,9 @@
+:- set_prolog_flag(encoding, utf8).
 :- use_module(menu).
 :- use_module(distribuicaoTerritorios).
 :- use_module(mostrarObjetivos).
 :- use_module(representacaoTerritorios).
+
 
 war:-
     menu(QtdJogF, QtdBotsF),
