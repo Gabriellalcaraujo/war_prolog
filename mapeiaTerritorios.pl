@@ -1,14 +1,16 @@
-retornaIndice(Sigla, Indice):-
-    Territorios =  ['AL', 'CA', 'GL', 'NY', 'MX', 'BR', 'AR', 'UK', 'GE', 'SP', 
+:- module(mapeiaTerritorios, [pertenceMapa/1, retornaIndice/2]).
+
+territorios(['AL', 'CA', 'GL', 'NY', 'MX', 'BR', 'AR', 'UK', 'GE', 'SP', 
               'TU', 'MR', 'EG', 'SA', 'MA', 'MO', 'SI', 'VL', 'CH', 'JP', 
-              'IN', 'VI', 'AU', 'NZ'],
-    nth1(Indice, Territorios, Sigla).
+              'IN', 'VI', 'AU', 'NZ']).
+
+retornaIndice(Sigla, Indice):-
+    territorios(Terr),
+    nth1(Indice, Terr, Sigla).
 
 retornaSigla(Indice, Sigla):-
-    Territorios =  ['AL', 'CA', 'GL', 'NY', 'MX', 'BR', 'AR', 'UK', 'GE', 'SP', 
-              'TU', 'MR', 'EG', 'SA', 'MA', 'MO', 'SI', 'VL', 'CH', 'JP', 
-              'IN', 'VI', 'AU', 'NZ'],
-    nth1(Indice, Territorios, Sigla).
+    territorios(Terr),
+    nth1(Indice, Terr, Sigla).
 
 verificaAdjacencia(Indice1, Indice2):-
     MatrizAdjacencia =
@@ -21,3 +23,7 @@ verificaAdjacencia(Indice1, Indice2):-
         [1, 17, 20], [21, 22, 20, 16, 17], [18, 19], [16, 19, 22], 
         [23, 21, 19], [24, 22], [23]
     ], nth1(Indice1, MatrizAdjacencia, Lista), member(Indice2, Lista).
+
+pertenceMapa(Sigla):-
+    territorios(Terr),
+    member(Sigla, Terr).

@@ -1,4 +1,4 @@
-:- module(distribuicaoTerritorios, [posicionamento_inicial/2]).
+:- module(distribuicaoTerritorios, [posicionamento_inicial/2, novaQtdExercitos/3, substituirSublista/4]).
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
@@ -33,7 +33,11 @@ determinaJogador(Qtd, Ind, R):-
 
 determinaJogadorRec(Qtd, Idc, Njogador, R):-
     Nterr is 24//Qtd,
-    (Nterr*Njogador >= Idc -> R = Njogador; Njogador1 is Njogador+1, determinaJogadorRec(Qtd, Idc, Njogador1, R)).
+    (Nterr*Njogador >= Idc -> R = Njogador; Njogador1 is Njogador+1, determinaJogadorRec(Qtd, Idc, Njogador1, R)). 
+
+novaQtdExercitos(Sublista, Qtd, NovaQtd) :-
+    nth0(1, Sublista, Resultado),
+    NovaQtd is Qtd + Resultado.
 
 main :-
     write('Teste de embaralhamento de territórios...'), nl,

@@ -1,4 +1,4 @@
-:- module(mostrarObjetivos, [retornaObjetivo/2, atribuir_objetivos/2]).
+:- module(mostrarObjetivos, [retornaObjetivo/2, atribuir_objetivos/2, retornaObjetivoJog/2]).
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
@@ -42,6 +42,10 @@ distribuir_objetivos([H|T], Indice) :-
     limpar_tela,
     NovoIndice is Indice + 1,
     distribuir_objetivos(T, NovoIndice).
+
+retornaObjetivoJog(IndiceJogador, IndiceObjetivo) :-
+    objetivos(ListaObj),
+    nth1(IndiceJogador, ListaObj, IndiceObjetivo). 
 
 limpar_tela :- 
     forall(between(1, 50, _), nl),

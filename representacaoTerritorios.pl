@@ -131,7 +131,7 @@ imprime_mapa_colorido(Mapa) :-
 
     nth0(19, Mapa, [J24, E24]), % jp 
     imprime_siglas_colorido(J24, 20),
-    write("⠀⠀⠀⠀⠀⠀⠀⠀⠀  "), nl,
+    write("           "), nl,
     write("        ⠹⣿⣿ "),
 
     % numero de mx 
