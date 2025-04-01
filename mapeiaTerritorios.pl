@@ -1,8 +1,8 @@
 :- module(mapeiaTerritorios, [pertenceMapa/1, retornaIndice/2]).
 
-territorios(['AL', 'CA', 'GL', 'NY', 'MX', 'BR', 'AR', 'UK', 'GE', 'SP', 
-              'TU', 'MR', 'EG', 'SA', 'MA', 'MO', 'SI', 'VL', 'CH', 'JP', 
-              'IN', 'VI', 'AU', 'NZ']).
+territorios(["AL", "CA", "GL", "NY", "MX", "BR", "AR", "UK", "GE", "SP", 
+              "TU", "MR", "EG", "SA", "MA", "MO", "SI", "VL", "CH", "JP", 
+              "IN", "VI", "AU", "NZ"]).
 
 retornaIndice(Sigla, Indice):-
     territorios(Terr),

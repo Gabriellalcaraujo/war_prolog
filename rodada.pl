@@ -12,25 +12,14 @@ verificaValidade(Qtd, QtdAdicoes):-
 
 
 menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :-
-%   nth1(IndiceJogador, Objetivos, Objetivo).
-%   verificaObjetivos(Mapa, IndiceJogador, Objetivo).
-
-    
+    nth1(IndiceJogador, Objetivos, Objetivo),
+    verificaObjetivos(Mapa, IndiceJogador, Objetivo),
     imprime_mapa_colorido(Mapa),
     format('Voce pode alocar ~w exercitos ~n', [QtdAdicoes]),
 
-
-    repeat,
-    writeln('Digite o territorio ao qual voce deseja adicionar (em forma de sigla):'),
-    read(Terr),
-    ( pertenceMapa(Terr) -> true ; 
-    write('Entrada invalida!'), nl, fail ),
-
-    % repeat,
-    write('Quantos exercitos voce deseja adicionar?'),
-    read(Qtd),
-    ( verificaValidade(Qtd, QtdAdicoes) -> true ;
-      write('Entrada invalida!'), nl, fail ),
+    lerTerritorio(Terr),
+    
+    lerQuantidade(Qtd, QtdAdicoes),
 
     retornaIndice(Terr, Indice),
     write(Indice),
@@ -44,4 +33,17 @@ menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :
         MapaFinal = MapaAtt  % Se terminou as alocações, retorna o mapa atualizado
     ). 
 
+lerQuantidade(Qtd, QtdAdicoes) :-
+    write('Quantos exercitos voce deseja adicionar?'), nl,
+    read_line_to_codes(user_input, Q),
+    string_codes(StringQ, Q),
+    atom_string(AtomQtd, StringQ),
+    atom_number(AtomQtd, Qtd),
+    ( verificaValidade(Qtd, QtdAdicoes) -> true
+    ; writeln('Entrada invalida!'), lerQuantidade(Qtd, QtdAdicoes) ). 
 
+lerTerritorio(Terr) :-
+    writeln('Digite o territorio ao qual voce deseja adicionar (em forma de sigla):'), 
+    read_line_to_string(user_input, Entrada),
+    ( pertenceMapa(Entrada) -> Terr = Entrada
+    ; writeln('Entrada invalida!'), lerTerritorio(Terr) ).  % Se inválido, chama recursivamente
