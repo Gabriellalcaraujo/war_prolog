@@ -1,3 +1,4 @@
+:- module(utilsAtaque, [ordenaDecrescente/2, calculaPerdas/4])
 :- use_module(library(random)).
 
 dados([1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6]).
@@ -25,7 +26,7 @@ dadosDefesa(L1, L2, L2F):-
     length(L1, R1),
     length(L2, R2),
     (R1 < R2 -> 
-    take(L2, R1, L2F);
+    take(L2, R1, L2F, N);
     QtdZeros is R1-R2,
     addZeros(L2, QtdZeros, L2F)
     ).
@@ -42,7 +43,7 @@ dadosAtaque(L1, L2, L1F):-
     (R1 < R2 -> 
     QtdZeros is R2-R1,
     addZeros(L1, QtdZeros, L1F);
-    take(L1, R2, L1F)
+    take(L1, R2, L1F, N)
     ).
 
 addZeros(L, QtdZeros, Lfinal):-
@@ -50,9 +51,9 @@ addZeros(L, QtdZeros, Lfinal):-
     maplist(=(0), Aux),
     append(L, Aux, Lnova).
 
-take(L, QtdTake, Lfinal):-
+take(L, QtdTake, Lfinal, N):-
     length(Lfinal, QtdTake),
-    append(Lfinal, _, L).
+    append(Lfinal, N, L).
 
 ordenaDecrescente(L, Ordenada):-
     sort(L, R),

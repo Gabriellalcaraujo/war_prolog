@@ -1,4 +1,4 @@
-:- module(distribuicaoTerritorios, [posicionamento_inicial/2, novaQtdExercitos/3, substituirSublista/4, ehDoJogador/3]).
+:- module(distribuicaoTerritorios, [posicionamento_inicial/2, novaQtdExercitos/3, substituirSublista/4, ehDoJogador/3, jogQtdExercitos/4]).
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
@@ -38,6 +38,12 @@ determinaJogadorRec(Qtd, Idc, Njogador, R):-
 novaQtdExercitos(Sublista, Qtd, NovaQtd) :-
     nth0(1, Sublista, Resultado),
     NovaQtd is Qtd + Resultado.
+
+jogQtdExercitos(Mapa, Terr, Qtd, Jogador):-
+    nth1(Terr, Mapa, Sublista),
+    nth1(2, Sublista, Qtd),
+    nth1(1, Sublista, Jogador).
+
 
 ehDoJogador(Mapa, Terr, Jogador):-
     nth1(Terr, Mapa, Sublista),
