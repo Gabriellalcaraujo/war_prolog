@@ -1,4 +1,4 @@
-:- module(distribuicaoTerritorios, [posicionamento_inicial/2, novaQtdExercitos/3, substituirSublista/4]).
+:- module(distribuicaoTerritorios, [posicionamento_inicial/2, novaQtdExercitos/3, substituirSublista/4, ehDoJogador/3]).
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
@@ -39,20 +39,8 @@ novaQtdExercitos(Sublista, Qtd, NovaQtd) :-
     nth0(1, Sublista, Resultado),
     NovaQtd is Qtd + Resultado.
 
-main :-
-    write('Teste de embaralhamento de territórios...'), nl,
-    % Teste do embaralhamento dos territórios
-    embaralhar_territorios(Shuffled),
-    write('Territórios embaralhados: '), write(Shuffled), nl,
-    
-    write('Teste de substituição de sublista...'), nl,
-    % Teste de substituição de sublista (vamos substituir o território 5 por [1, 1])
-    mapa(MapaInicial),
-    substituirSublista(MapaInicial, 4, [1, 1], MapaSubstituido),
-    write('Mapa após substituição: '), write(MapaSubstituido), nl,
+ehDoJogador(Mapa, Terr, Jogador):-
+    nth1(Terr, Mapa, Sublista),
+    nth1(1, Sublista, Jogador).
 
-    
-    write('Teste de distribuição de territórios...'), nl,
-    % Teste da função de distribuição de territórios
-    posicionamento_inicial(2, NovoMapa),
-    write('Mapa final: '), write(NovoMapa), nl.
+

@@ -12,38 +12,37 @@ verificaValidade(Qtd, QtdAdicoes):-
 
 
 menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :-
-    nth1(IndiceJogador, Objetivos, Objetivo),
-    verificaObjetivos(Mapa, IndiceJogador, Objetivo),
+    verificaObjetivosRec(Mapa, IndiceJogador, Objetivos),
     imprime_mapa_colorido(Mapa),
+    
     format('Voce pode alocar ~w exercitos ~n', [QtdAdicoes]),
 
     lerTerritorio(Terr),
     
-    lerQuantidade(Qtd, QtdAdicoes),
+    lerQuantidade(QtdAdicoes, Qtd),
 
     retornaIndice(Terr, Indice),
-    write(Indice),
-    nth0(Indice, Mapa, Sublista),
+    nth1(Indice, Mapa, Sublista),
     novaQtdExercitos(Sublista, Qtd, NovaQtd),
     substituirSublista(Mapa, Indice, [IndiceJogador, NovaQtd], MapaAtt),
     NovaQtdAdicoes is QtdAdicoes - Qtd,
     ( NovaQtdAdicoes > 0 -> 
         menuAlocacaoTerritorios(MapaAtt, IndiceJogador, NovaQtdAdicoes, Objetivos, MapaFinal)
     ;  
-        MapaFinal = MapaAtt  % Se terminou as alocações, retorna o mapa atualizado
+        MapaFinal = MapaAtt, imprime_mapa_colorido(MapaFinal)
     ). 
 
-lerQuantidade(Qtd, QtdAdicoes) :-
+lerQuantidade(QtdAdicoes, Qtd) :-
     write('Quantos exercitos voce deseja adicionar?'), nl,
     read_line_to_codes(user_input, Q),
     string_codes(StringQ, Q),
     atom_string(AtomQtd, StringQ),
-    atom_number(AtomQtd, Qtd),
-    ( verificaValidade(Qtd, QtdAdicoes) -> true
-    ; writeln('Entrada invalida!'), lerQuantidade(Qtd, QtdAdicoes) ). 
+    atom_number(AtomQtd, QtdD),
+    ( verificaValidade(QtdD, QtdAdicoes) -> Qtd = QtdD
+    ; writeln('Entrada invalida!'), lerQuantidade(QtdAdicoes, Qtd) ). 
 
 lerTerritorio(Terr) :-
     writeln('Digite o territorio ao qual voce deseja adicionar (em forma de sigla):'), 
     read_line_to_string(user_input, Entrada),
-    ( pertenceMapa(Entrada) -> Terr = Entrada
+    ( pertenceMapa(Entrada)  -> Terr = Entrada  % Depois chamar tbm a função que verifica se terr é do jogador
     ; writeln('Entrada invalida!'), lerTerritorio(Terr) ).  % Se inválido, chama recursivamente
