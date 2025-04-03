@@ -10,7 +10,12 @@ ataque(Mapa, Terr, Alvo, QtdAtaq, DadosAtac, DadosDef):-
 batalhaMapa(Mapa, PerdasAtaq, PerdasDef, Terr, Alvo):-
     jogQtdExercitos(Mapa, Terr, QtdAtaq, JogadorAtaq),
     jogQtdExercitos(Mapa, Alvo, QtdDef, JogadorDef),
-    NovaQtdAtac is Qtd-PerdasAtaq,
-    NovaQtdDef is Qtd-PerdasDef,
+    NovaQtdAtac is QtdAtaq-PerdasAtaq,
+    NovaQtdDef is QtdDef-PerdasDef,
     substituirSublista(Mapa, Terr, [JogadorAtaq, NovaQtdAtac], NovoMapa),
-    substituirSublista(NovoMapa, Alvo, [JogadorDef, NovaQtdDef], MapaAtualizado).
+    substituirSublista(NovoMapa, Alvo, [JogadorDef, NovaQtdDef], MapaAtualizado),
+    write(MapaAtualizado).
+
+main :- 
+    batalhaMapa([[1,5],[1,6],[1,6],[2,4],[2,7]], 3, 2, 1, 4). 
+    

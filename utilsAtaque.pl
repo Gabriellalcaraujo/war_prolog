@@ -1,4 +1,4 @@
-:- module(utilsAtaque, [ordenaDecrescente/2, calculaPerdas/4])
+:- module(utilsAtaque, [ordenaDecrescente/2, calculaPerdas/4]).
 :- use_module(library(random)).
 
 dados([1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6]).
