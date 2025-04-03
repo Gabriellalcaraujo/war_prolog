@@ -1,11 +1,15 @@
-:- module(utilsAtaque, [ordenaDecrescente/2, calculaPerdas/4]).
+:- module(utilsAtaque, [ordenaDecrescente/2, calculaPerdas/4, maxUtilExercitos/3, embaralhar_dados/1, min/2, dadosAtaque/3, dadosDefesa/3]).
 :- use_module(library(random)).
 
 dados([1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6]).
 
-embaralhar_dados(Shuffled):-
+embaralhar_dados(QtdAtac, QtdTotal, DadosAtac, DadosDef):-
     dados(List),
-    randompermutation(List, Shuffled).
+    randompermutation(List, Shuffled),
+    take(Shuffled, QtdDados, Dados, _),
+    take(Dados, QtdAtac, DadosA, DadosD)
+    ordenaDecrescente(DadosA, DadosAtac),
+    ordenaDecrescente(DadosD, DadosDef).
 
 maxUtilExercitos(Mapa, Terr, R):-
     nth1(Terr, Mapa, Sub),
@@ -51,9 +55,10 @@ addZeros(L, QtdZeros, Lfinal):-
     maplist(=(0), Aux),
     append(L, Aux, Lnova).
 
-take(L, QtdTake, Lfinal, N):-
+% O resto da lista importa paga pegarmos os dados do defensor
+take(L, QtdTake, Lfinal, Resto):-
     length(Lfinal, QtdTake),
-    append(Lfinal, N, L).
+    append(Lfinal, Resto, L).
 
 ordenaDecrescente(L, Ordenada):-
     sort(L, R),
