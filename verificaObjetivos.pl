@@ -1,12 +1,12 @@
 :- module(verificaObjetivos, [verificaObjetivosRec/3]).
 
 verificaObjetivosRec(_, _,_).
-verificaObjetivosRec(Mapa, IndiceJogador, Objetivos):-
-    IndiceJogador >= 1,
-    nth1(IndiceJogador, Objetivos, Objetivo),
-    verificaObjetivos(Mapa, IndiceJogador, Objetivo),
-    IndiceJogador is IndiceJogador-1, 
-    verificaObjetivosRec.
+verificaObjetivosRec(Mapa, QtdJog, Objetivos):-
+    QtdJog >= 1,
+    nth1(QtdJog, Objetivos, Objetivo),
+    verificaObjetivos(Mapa, QtdJog, Objetivo),
+    QtdJog1 is QtdJog-1, 
+    verificaObjetivosRec(Mapa, QtdJog1, Objetivos).
 
 % Predicado para o objetivo 1
 verificaObjetivos(Mapa, IndiceJogador, 1) :- 
