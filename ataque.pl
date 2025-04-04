@@ -11,7 +11,7 @@ batalhaMapa(Mapa, PerdasAtaq, PerdasDef, Terr, Alvo, NovoMapa):-
     jogQtdExercitos(Mapa, Terr, QtdAtaq, JogadorAtaq),
     jogQtdExercitos(Mapa, Alvo, QtdDef, JogadorDef),
     NovaQtdAtac is QtdAtaq-PerdasAtaq,
-    NovaQtdDef is QtdPerdas-PerdasDef,
+    NovaQtdDef is QtdDef-PerdasDef,
     substituirSublista(Mapa, Terr, [JogadorAtaq, NovaQtdAtac], MapaParcial),
     substituirSublista(MapaParcial, Alvo, [JogadorDef, NovaQtdDef], MapaAtualizado),
     NovoMapa = MapaAtualizado.
@@ -44,7 +44,7 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos):-
         writeln("Entrada inválida :("), fail),
         
         repeat,
-        format("Com quantos exercitos voce deseja atacar? min:1, max: ~w", [Max]),
+        format("Com quantos exercitos voce deseja atacar? min:1, max: ~w", [Max]), nl,
         read_line_to_string(user_input, Qtd),
         (atom_number(Qtd, QtdEx), QtdEx =< Max, QtdEx >= 1 -> !; 
         writeln("Entrada inválida :("), fail),
@@ -60,18 +60,18 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos):-
         maxUtilExercitos(NovoMapa, Terr, NovoMax),
 
         repeat,
-        (conquistouTerr(NovoMapa, Alvo) -> format("Voce conquistou o territorio! Quantos exercitos voce deseja transferir? (min: 1, max: ~w)", [NovoMax]),
-        read_line_to_string(user_input, QtdTransferencia),
-        (atom_number(QtdTransferencia, QtdT), QtdT =< NovoMax, QtdT >= 1 -> !;
+        format("Com quantos exercitos voce deseja atacar? min:1, max: ~w", [Max]), nl,
+        read_line_to_string(user_input, Qtd),
+        (atom_number(Qtd, QtdEx), QtdEx =< Max, QtdEx >= 1 -> !; 
         writeln("Entrada inválida :("), fail),
+        
         nth1(Alvo, NovoMapa, Sublista),
         novaQtdExercitos(Sublista, QtdT, Resultado),
         substituirSublista(NovoMapa, Alvo, [IndiceJogador, Resultado], MapaAtt),
         jogQtdExercitos(MapaAtt, Terr, QtdExercitos, _),
         NovaQtdE is QtdExercitos - QtdT,
         substituirSublista(MapaAtt, Terr, [IndiceJogador, NovaQtdE], MapaAtt2)),
-        inputAtaque(MapaAtt2, IndiceJogador, JogadoresInfo, Objetivos)
-        );
+        inputAtaque(MapaAtt2, IndiceJogador, JogadoresInfo, Objetivos);
         true.
     
 
