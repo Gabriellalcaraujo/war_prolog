@@ -46,6 +46,7 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, Objetivos, NovoMapa) :-
         NovaQtdDestino is QtdDestino + QtdEx,
 
         substituirSublista(Mapa, Terr, [Jogador, NovaQtdOrigem], MapaParcial),
-        substituirSublista(MapaParcial, Alvo, [Jogador, NovaQtdDestino], NovoMapa);
-        NovoMapa = Mapa 
+        substituirSublista(MapaParcial, Alvo, [Jogador, NovaQtdDestino], NovoMapa),
+        inputMovimento(NovoMapa, Jogador, JogadoresInfo, Objetivos, NovoMapaFinal);
+        NovoMapaFinal = Mapa
     ).
