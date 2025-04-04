@@ -51,11 +51,11 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos):-
         jogQtdExercitos(Mapa, Alvo, QtdDef, _),
         min(QtdDef, R), QtdDados is QtdEx + R,
         embaralhar_dados(QtdEx, QtdDados, DadosAtac, DadosDef),
-        format("DADOS DE ATAQUE: ~w", [DadosAtac]),
-        format("DADOS DE DEFESA: ~w", [DadosDef]),
+        format("DADOS DE ATAQUE: ~w", [DadosAtac]), nl,
+        format("DADOS DE DEFESA: ~w", [DadosDef]), nl, nl,
         formataDados(DadosAtac, DadosDef, PerdasAtaq, PerdasDef), % Pensar em chamar calcula perdas dentro de dadosAtaque
-        format("O jogador atacante perdeu ~w exercitos", [PerdasAtaq]),
-        format("O jogador defensor perdeu ~w exercitos", [PerdasDef]),
+        format("O jogador atacante perdeu ~w exercitos", [PerdasAtaq]), nl,
+        format("O jogador defensor perdeu ~w exercitos", [PerdasDef]), nl,
         batalhaMapa(Mapa, PerdasAtaq, PerdasDef, Terr, Alvo, NovoMapa),
         maxUtilExercitos(NovoMapa, Terr, NovoMax),
 

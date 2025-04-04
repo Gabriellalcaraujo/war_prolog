@@ -6,7 +6,7 @@ dados([1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6])
 embaralhar_dados(QtdAtac, QtdTotal, DadosAtac, DadosDef):-
     dados(List),
     random_permutation(List, Shuffled),
-    take(Shuffled, QtdDados, Dados, _),
+    take(Shuffled, QtdTotal, Dados, _),
     take(Dados, QtdAtac, DadosA, DadosD),
     ordenaDecrescente(DadosA, DadosAtac),
     ordenaDecrescente(DadosD, DadosDef).
