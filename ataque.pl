@@ -70,8 +70,10 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos):-
         writeln("Entrada inválida :("), fail),
         
         nth1(Alvo, NovoMapa, Sublista),
-        novaQtdExercitos(Sublista, QtdTransf, Resultado),
-        substituirSublista(NovoMapa, Alvo, [IndiceJogador, Resultado], MapaAtt),
+        % novaQtdExercitos(Sublista, QtdTransf, Resultado),
+        substituirSublista(NovoMapa, Alvo, [IndiceJogador, QtdTransf], MapaAtt),
+
+        % substituirSublista(NovoMapa, Alvo, [IndiceJogador, Resultado], MapaAtt),
         jogQtdExercitos(MapaAtt, Terr, QtdExercitos, _),
         NovaQtdE is QtdExercitos - QtdTransf,
         substituirSublista(MapaAtt, Terr, [IndiceJogador, NovaQtdE], MapaAtt2),
