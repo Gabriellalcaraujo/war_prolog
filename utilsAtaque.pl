@@ -23,7 +23,8 @@ min(Qtd, R):-
 formataDados(L1, L2, PerdasAtaq, PerdasDef) :-  
     length(L1, R1),  
     length(L2, R2),  
-    R1 == R2.
+    R1 == R2,
+    calculaPerdas(L1, L2, PerdasAtaq, PerdasDef).
 
 % Se a quantidade de dados do atacante e do defensor forem diferentes, manipula L2 pra ficar do mesmo tamanho de L1
 formataDados(L1, L2, PerdasAtaq, PerdasDef):-

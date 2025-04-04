@@ -10,11 +10,12 @@
 batalhaMapa(Mapa, PerdasAtaq, PerdasDef, Terr, Alvo, NovoMapa):-
     jogQtdExercitos(Mapa, Terr, QtdAtaq, JogadorAtaq),
     jogQtdExercitos(Mapa, Alvo, QtdDef, JogadorDef),
+    writeln(QtdAtaq),
+    writeln(QtdDef),
     NovaQtdAtac is QtdAtaq-PerdasAtaq,
     NovaQtdDef is QtdDef-PerdasDef,
     substituirSublista(Mapa, Terr, [JogadorAtaq, NovaQtdAtac], MapaParcial),
-    substituirSublista(MapaParcial, Alvo, [JogadorDef, NovaQtdDef], MapaAtualizado),
-    NovoMapa = MapaAtualizado.
+    substituirSublista(MapaParcial, Alvo, [JogadorDef, NovaQtdDef], NovoMapa).
 
 conquistouTerr(Mapa, Alvo):-
     jogQtdExercitos(Mapa, Alvo, QtdExercitos, _),
@@ -54,25 +55,29 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos):-
         format("DADOS DE ATAQUE: ~w", [DadosAtac]), nl,
         format("DADOS DE DEFESA: ~w", [DadosDef]), nl, nl,
         formataDados(DadosAtac, DadosDef, PerdasAtaq, PerdasDef), % Pensar em chamar calcula perdas dentro de dadosAtaque
+        
         format("O jogador atacante perdeu ~w exercitos", [PerdasAtaq]), nl,
         format("O jogador defensor perdeu ~w exercitos", [PerdasDef]), nl,
         batalhaMapa(Mapa, PerdasAtaq, PerdasDef, Terr, Alvo, NovoMapa),
+        writeln(NovoMapa),
         maxUtilExercitos(NovoMapa, Terr, NovoMax),
-
+    
+        (conquistouTerr(NovoMapa, Alvo)->
         repeat,
-        format("Com quantos exercitos voce deseja atacar? min:1, max: ~w", [Max]), nl,
-        read_line_to_string(user_input, Qtd),
-        (atom_number(Qtd, QtdEx), QtdEx =< Max, QtdEx >= 1 -> !; 
+        format("Você conquistou o território! Quantos exércitos você deseja transferir? min: 1, max: ~w~n", [NovoMax]),
+        read_line_to_string(user_input, QtdN),
+        (atom_number(QtdN, QtdTransf), QtdTransf =< NovoMax, QtdEx >= 1 -> !; 
         writeln("Entrada inválida :("), fail),
         
         nth1(Alvo, NovoMapa, Sublista),
-        novaQtdExercitos(Sublista, QtdT, Resultado),
+        novaQtdExercitos(Sublista, QtdTransf, Resultado),
         substituirSublista(NovoMapa, Alvo, [IndiceJogador, Resultado], MapaAtt),
         jogQtdExercitos(MapaAtt, Terr, QtdExercitos, _),
-        NovaQtdE is QtdExercitos - QtdT,
-        substituirSublista(MapaAtt, Terr, [IndiceJogador, NovaQtdE], MapaAtt2)),
+        NovaQtdE is QtdExercitos - QtdTransf,
+        substituirSublista(MapaAtt, Terr, [IndiceJogador, NovaQtdE], MapaAtt2),
         inputAtaque(MapaAtt2, IndiceJogador, JogadoresInfo, Objetivos);
-        true.
+        inputAtaque(NovoMapa, IndiceJogador, JogadoresInfo, Objetivos));
+        true).
     
 
 
