@@ -1,4 +1,4 @@
-:- module(ataque, [inputAtaque/4]).
+:- module(ataque, [inputAtaque/5]).
 :- use_module(distribuicaoTerritorios).
 :- use_module(utilsAtaque).
 :- use_module(verificaObjetivos).
@@ -21,7 +21,7 @@ conquistouTerr(Mapa, Alvo):-
     jogQtdExercitos(Mapa, Alvo, QtdExercitos, _),
     QtdExercitos =:= 0.
 
-inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos):-
+inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
     verificaObjetivosRec(Mapa, JogadoresInfo, Objetivos),
     imprime_mapa_colorido(Mapa),
     repeat,
@@ -69,17 +69,13 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos):-
         (atom_number(QtdN, QtdTransf), QtdTransf =< NovoMax, QtdEx >= 1 -> !; 
         writeln("Entrada inválida :("), fail),
         
-        nth1(Alvo, NovoMapa, Sublista),
-        % novaQtdExercitos(Sublista, QtdTransf, Resultado),
         substituirSublista(NovoMapa, Alvo, [IndiceJogador, QtdTransf], MapaAtt),
-
-        % substituirSublista(NovoMapa, Alvo, [IndiceJogador, Resultado], MapaAtt),
         jogQtdExercitos(MapaAtt, Terr, QtdExercitos, _),
         NovaQtdE is QtdExercitos - QtdTransf,
         substituirSublista(MapaAtt, Terr, [IndiceJogador, NovaQtdE], MapaAtt2),
-        inputAtaque(MapaAtt2, IndiceJogador, JogadoresInfo, Objetivos);
-        inputAtaque(NovoMapa, IndiceJogador, JogadoresInfo, Objetivos));
-        true).
+        inputAtaque(MapaAtt2, IndiceJogador, JogadoresInfo, Objetivos,  MapaF);
+        inputAtaque(NovoMapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF));
+        MapaF = Mapa, true).
     
 
 

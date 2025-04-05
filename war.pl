@@ -17,6 +17,6 @@ war:-
     atribuir_objetivos(QtdJog, Objetivos),
     imprime_mapa_colorido(NovoMapa), 
     menuAlocacaoTerritorios(NovoMapa, 1, 5, Objetivos, MapaFinal), nl,
-    inputAtaque(MapaFinal, 1, QtdJog, Objetivos),
-    inputMovimento(MapaFinal, 1, QtdJog, Objetivos, MapaAtt),
-    imprime_mapa_colorido(MapaAtt).
+    inputAtaque(MapaFinal, 1, QtdJog, Objetivos, MapaAtt2),
+    writeln(MapaAtt2),
+    inputMovimento(MapaAtt2, 1, QtdJog, [], Objetivos, MapaAtt3).

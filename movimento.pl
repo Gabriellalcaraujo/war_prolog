@@ -1,11 +1,14 @@
-:- module(movimento, [inputMovimento/5]).
+:- module(movimento, [inputMovimento/6]).
 :- use_module(distribuicaoTerritorios).
 :- use_module(representacaoTerritorios).
 :- use_module(verificaObjetivos).
 :- use_module(mapeiaTerritorios).
 :- use_module(utilsAtaque).
 
-inputMovimento(Mapa, Jogador, JogadoresInfo, Objetivos, NovoMapa) :-
+movimentoJaRealizado(Terr, Movimentos):-
+    member(Terr, Movimentos).
+
+inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF) :-
     verificaObjetivosRec(Mapa, JogadoresInfo, Objetivos),
     imprime_mapa_colorido(Mapa),
     repeat,
@@ -18,9 +21,8 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, Objetivos, NovoMapa) :-
         repeat,
             writeln("De qual território você deseja transferir os exércitos?"),
             read_line_to_string(user_input, Sigla),
-            (pertenceMapa(Sigla) -> ! ; 
+            (pertenceMapa(Sigla), retornaIndice(Sigla, Terr), \+ movimentoJaRealizado(Terr, MovimentosFeitos) -> ! ; 
             writeln("Entrada inválida :("), fail),
-            retornaIndice(Sigla, Terr),
 
         repeat,
             writeln("E para qual território deseja transferir?"),
@@ -47,6 +49,5 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, Objetivos, NovoMapa) :-
 
         substituirSublista(Mapa, Terr, [Jogador, NovaQtdOrigem], MapaParcial),
         substituirSublista(MapaParcial, Alvo, [Jogador, NovaQtdDestino], NovoMapa),
-        inputMovimento(NovoMapa, Jogador, JogadoresInfo, Objetivos, NovoMapaFinal);
-        NovoMapaFinal = Mapa
-    ).
+        inputMovimento(NovoMapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF);
+        MapaF = Mapa, true).

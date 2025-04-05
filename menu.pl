@@ -1,13 +1,16 @@
 :- module(menu, [menu/2, verificaOpcao/1]).
 
 verificaOpcao(O):- O = 0; O = 1.
+
 validaJogadores(QtdJog):- 
     Opcoes = [1, 2, 3, 4],
     member(QtdJog, Opcoes).
 
 maxBots(QtdJog, R):- R is 4-QtdJog. 
 
-validaBots(QtdBots, Q):- QtdBots >= 0, QtdBots =< Q.
+minBots(QtdJog, Min):- (QtdJog =:= 1 -> Min = 1; Min = 0).
+
+validaBots(QtdBots, Min, Q):- QtdBots >= Min, QtdBots =< Q.
 
 menu(QtdJogF, QtdBotsF):-
     repeat,
@@ -24,9 +27,10 @@ menu(QtdJogF, QtdBotsF):-
     ),
     (QtdF = 4 -> QtdBotsF = 0; 
         maxBots(QtdF, R),  
+        minBots(QtdF, Min),
         repeat,  
-        format("Quantos bots seu jogo tera? (0 a ~w)~n", [R]),  
+        format("Quantos bots seu jogo tera? (~w a ~w)~n", [Min, R]),  
         read_line_to_string(user_input, QtdB),
-    ( atom_number(QtdB, QtdBF), validaBots(QtdBF, R) -> QtdBotsF = QtdBF, !;   
+    ( atom_number(QtdB, QtdBF), validaBots(QtdBF, Min, R) -> QtdBotsF = QtdBF, !;   
         writeln("Entrada inválida :("), fail
     )).  
