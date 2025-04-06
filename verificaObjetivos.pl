@@ -47,6 +47,6 @@ verificaObjetivos(Mapa, IndiceJogador, 6) :-
 
 % Predicado para o objetivo 7
 verificaObjetivos(Mapa, IndiceJogador, 7) :-
-    (IndiceJogador =:= 2 -> verificaObjetivos(Mapa, 2, 1); /+ temTerritorio(IndiceJogador, Mapa)).
+    (IndiceJogador =:= 2 -> verificaObjetivos(Mapa, 2, 1); \+ temTerritorio(IndiceJogador, Mapa)).
 
 verificaObjetivos(_, _, _).

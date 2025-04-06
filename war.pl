@@ -8,7 +8,6 @@
 :- use_module(movimento).
 
 
-
 war:-
     menu(QtdJogF, QtdBotsF),
     QtdJog is QtdJogF + QtdBotsF,
@@ -16,7 +15,4 @@ war:-
     mostrarObjetivos:retornaObjetivo(1, Objetivo),
     atribuir_objetivos(QtdJog, Objetivos),
     imprime_mapa_colorido(NovoMapa), 
-    menuAlocacaoTerritorios(NovoMapa, 1, 5, Objetivos, MapaFinal), nl,
-    inputAtaque(MapaFinal, 1, QtdJog, Objetivos, MapaAtt2),
-    writeln(MapaAtt2),
-    inputMovimento(MapaAtt2, 1, QtdJog, [], Objetivos, MapaAtt3).
+    rodada(1, QtdJog, QtdBotsF, Objetivos, 1, NovoMapa, 0).
