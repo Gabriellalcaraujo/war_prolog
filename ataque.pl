@@ -1,4 +1,4 @@
-:- module(ataque, [inputAtaque/5]).
+:- module(ataque, [inputAtaque/5, batalhaMapa/6, conquistouTerr/2]).
 :- use_module(distribuicaoTerritorios).
 :- use_module(utilsAtaque).
 :- use_module(verificaObjetivos).
