@@ -2,7 +2,7 @@
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
-objetivos([1,2,3,4,5,6]).
+objetivos([1,2,3,4,5,6,7]).
 
 retornaObjetivo(Indice, Objetivo):-
     Objetivos = [

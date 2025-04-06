@@ -1,4 +1,5 @@
 :- module(verificaObjetivos, [verificaObjetivosRec/3]).
+:- use_module(rodada).
 
 verificaObjetivosRec(_, _,_).
 verificaObjetivosRec(Mapa, QtdJog, Objetivos):-
@@ -44,5 +45,8 @@ verificaObjetivos(Mapa, IndiceJogador, 6) :-
             (nth0(Indice, Mapa, [IndiceJogador, _])), Territorios), 
     Territorios = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].
 
+% Predicado para o objetivo 7
+verificaObjetivos(Mapa, IndiceJogador, 7) :-
+    (IndiceJogador =:= 2 -> verificaObjetivos(Mapa, 2, 1); /+ temTerritorio(IndiceJogador, Mapa)).
 
 verificaObjetivos(_, _, _).
