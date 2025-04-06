@@ -1,15 +1,18 @@
 :- module(utilsAtaque, [ordenaDecrescente/2, calculaPerdas/4, maxUtilExercitos/3, embaralhar_dados/4, min/2, formataDados/4]).
 :- use_module(library(random)).
 
-dados([1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6]).
-
 embaralhar_dados(QtdAtac, QtdTotal, DadosAtac, DadosDef):-
-    dados(List),
-    random_permutation(List, Shuffled),
-    take(Shuffled, QtdTotal, Dados, _),
-    take(Dados, QtdAtac, DadosA, DadosD),
-    ordenaDecrescente(DadosA, DadosAtac),
-    ordenaDecrescente(DadosD, DadosDef).
+    geraDadosAleatorios(QtdTotal, DadosAleatorios),
+    take(DadosAleatorios, QtdAtac, DadosAtaque, DadosDefesa),
+    ordenaDecrescente(DadosAtaque, DadosAtac),
+    ordenaDecrescente(DadosDefesa, DadosDef).
+
+geraDadosAleatorios(0, []) :- !.
+geraDadosAleatorios(N, [Elem | Resto]) :-
+    N > 0,
+    random_between(1, 6, Elem),
+    N1 is N - 1,
+    geraDadosAleatorios(N1, Resto).
 
 maxUtilExercitos(Mapa, Terr, R):-
     nth1(Terr, Mapa, Sub),
@@ -45,7 +48,7 @@ take(L, QtdTake, Lfinal, Resto):-
     append(Lfinal, Resto, L).
 
 ordenaDecrescente(L, Ordenada):-
-    sort(L, R),
+    msort(L, R),
     reverse(R, Ordenada).
 
 calculaPerdas([], [], 0, 0).
@@ -60,6 +63,6 @@ calculaPerdas([H|T], [H2|T2], PerdasAtaq, PerdasDef):-
     PerdasAtaq is PerdasAtaq2+1.
 
 main3:- 
-    dadosDefesa([5,3,2],[4,4], Pa, Pd),
-    writeln(Pa),
-    writeln(Pd).
+    embaralhar_dados(3, 6, D1, D2),
+    format("Dados de ataque: ~w~n", [D1]),
+    format("Dados de defesa: ~w~n", [D2]).

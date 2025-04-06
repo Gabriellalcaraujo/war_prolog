@@ -7,6 +7,7 @@
 :- use_module(salvamento).
 :- use_module(ataque).
 :- use_module(movimento).
+:- use_module(botJogadas).
 
 ehBot(JogadoresInfo, QtdBots, IndiceJogador):-
     IndicesHumanos is JogadoresInfo - QtdBots,
@@ -38,7 +39,7 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
                 repeat,
                 writeln("Você deseja salvar e sair do jogo? Sim (1) Não (0)"),
                 read_line_to_string(user_input, D),
-                (atom_number(D, N), number(N, [0, 1]) -> !;
+                (atom_number(D, N), member(N, [0, 1]) -> !;
                     writeln("Opção inválida. Por favor, digite 1 para salvar ou 0 para continuar."), fail),
                 
                 (N =:= 1 ->
@@ -69,7 +70,7 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
                         rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaPosMov, 0)));
 
             define_cor(IndiceJogador),
-            format("Vez do jogador ~w", [IndiceJogador]),
+            format("Vez do jogador ~w~n", [IndiceJogador]),
             reset_color,
             (ehBot(JogadoresInfo, QtdBots, IndiceJogador) ->
                 botAloca(Mapa, IndiceJogador, 5, MapaAtt),

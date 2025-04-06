@@ -51,6 +51,9 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         writeln("Entrada inválida :("), fail),
         jogQtdExercitos(Mapa, Alvo, QtdDef, _),
         min(QtdDef, R), QtdDados is QtdEx + R,
+        format("R: ~w~n", [R]), %log
+        format("QtdEx: ~w~n", [QtdEx]), %log
+        format("QtdDados: ~w~n", [QtdDados]), %log
         embaralhar_dados(QtdEx, QtdDados, DadosAtac, DadosDef),
         format("DADOS DE ATAQUE: ~w", [DadosAtac]), nl,
         format("DADOS DE DEFESA: ~w", [DadosDef]), nl, nl,

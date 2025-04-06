@@ -1,3 +1,4 @@
+:- module(botJogadas, [botJoga/5, botAtaque/5, botAloca/4]).
 :- use_module(mapeiaTerritorios).
 :- use_module(utilsAtaque).
 :- use_module(ataque).
@@ -43,8 +44,10 @@ botAtaque(Mapa, IndiceJogador, Ataque, Objetivos, MapaF) :-
     random_between(1, Max, QtdAtaque),
     writeln(QtdAtaque), %log
     QtdDados is QtdAtaque + QtdDef,
-    writeln(QtdDados), %log
-    format("O jogador ~w usou o território ~w para atacar o território ~w utilizando ~w exércitos.~n", [IndiceJogador, Atacante, Atacado, QtdAtaque]),
+    writeln(QtdDados), %log,
+    retornaSigla(Atacante, SiglaAtacante),
+    retornaSigla(Atacado, SiglaAtacado),
+    format("O jogador ~w usou o território ~w para atacar o território ~w utilizando ~w exércitos.~n", [IndiceJogador, SiglaAtacante, SiglaAtacado, QtdAtaque]),
     embaralhar_dados(QtdAtaque, QtdDados, DadosAtac, DadosDef),
     format("DADOS DE ATAQUE: ~w~n", [DadosAtac]),
     format("DADOS DE DEFESA: ~w~n~n", [DadosDef]),
@@ -67,18 +70,22 @@ botAtaque(Mapa, IndiceJogador, Ataque, Objetivos, MapaF) :-
 
 botAloca(Mapa, IndiceJogador, QtdRestante, NovoMapa) :-
     (
-        QtdRestante =:= 0 -> NovoMapa = Mapa;
-        findall(Index, (nth1(Index, Mapa, [IndiceJogador, _])), Indices),
-        random_member(Territorio, Indices),
-        random_between(1, QtdRestante, Qtd),
-        format("O jogador ~w (BOT) alocou ~w exércitos no território ~w", [IndiceJogador, Qtd, Territorio]),
-        nth1(Territorio, Mapa, MapaTerr),
-        nth0(1, MapaTerr, QtdAntiga),
-        NovaQtd is QtdAntiga + Qtd,
-        substituirSublista(Mapa, Territorio, [IndiceJogador, NovaQtd], NovoMapa),
-        NovaQtdRestante is QtdRestante - Qtd,
-        botAloca(NovoMapa, IndiceJogador, NovaQtdRestante, NovissimoMapa)
+        QtdRestante =:= 0 ->
+            NovoMapa = Mapa
+        ;
+            findall(Index, (nth1(Index, Mapa, [IndiceJogador, _])), Indices),
+            random_member(Territorio, Indices),
+            random_between(1, QtdRestante, Qtd),
+            retornaSigla(Territorio, SiglaTerritorio),
+            format("O jogador ~w (BOT) alocou ~w exércitos no território ~w~n", [IndiceJogador, Qtd, SiglaTerritorio]),
+            nth1(Territorio, Mapa, MapaTerr),
+            nth0(1, MapaTerr, QtdAntiga),
+            NovaQtd is QtdAntiga + Qtd,
+            substituirSublista(Mapa, Territorio, [IndiceJogador, NovaQtd], MapaAtualizado),
+            NovaQtdRestante is QtdRestante - Qtd,
+            botAloca(MapaAtualizado, IndiceJogador, NovaQtdRestante, NovoMapa)
     ).
+
     
 
 
