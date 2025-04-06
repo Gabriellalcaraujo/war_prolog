@@ -65,7 +65,21 @@ botAtaque(Mapa, IndiceJogador, Ataque, Objetivos, MapaF) :-
         MapaF = NovoMapa
     ).
 
-
+botAloca(Mapa, IndiceJogador, QtdRestante, NovoMapa) :-
+    (
+        QtdRestante =:= 0 -> NovoMapa = Mapa;
+        findall(Index, (nth1(Index, Mapa, [IndiceJogador, _])), Indices),
+        random_member(Territorio, Indices),
+        random_between(1, QtdRestante, Qtd),
+        format("O jogador ~w (BOT) alocou ~w exércitos no território ~w", [IndiceJogador, Qtd, Territorio]),
+        nth1(Territorio, Mapa, MapaTerr),
+        nth0(1, MapaTerr, QtdAntiga),
+        NovaQtd is QtdAntiga + Qtd,
+        substituirSublista(Mapa, Territorio, [IndiceJogador, NovaQtd], NovoMapa),
+        NovaQtdRestante is QtdRestante - Qtd,
+        botAloca(NovoMapa, IndiceJogador, NovaQtdRestante, NovissimoMapa)
+    ).
+    
 
 
 possibilidadesDeAtaque(Mapa, IndiceJ, Possibilidades) :-
