@@ -95,12 +95,19 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
 menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :-
     verificaObjetivosRec(Mapa, IndiceJogador, Objetivos),
     imprime_mapa_colorido(Mapa),
-    
     format('Voce pode alocar ~w exercitos ~n', [QtdAdicoes]),
-
-    lerTerritorio(Terr),
     
-    lerQuantidade(QtdAdicoes, Qtd),
+    repeat,
+    writeln('Digite o territorio ao qual voce deseja adicionar (em forma de sigla):'),
+    read_line_to_string(user_input, Sigla),
+    (pertenceMapa(Sigla), retornaIndice(Sigla, Idc), ehDoJogador(Mapa, Terr, IndiceJogador)->!;
+        writeln("Entrada inválida :("), fail),
+    
+    repeat,
+    write('Quantos exercitos voce deseja adicionar?'),
+    read_line_to_string(user_input, Qtd),
+    ( atom_number(Qtd, QtdAdd), verificaOpcao(QtdAdd) -> !;   
+        writeln("Entrada inválida :("), fail ),
 
     retornaIndice(Terr, Indice),
     nth1(Indice, Mapa, Sublista),
@@ -108,22 +115,6 @@ menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :
     substituirSublista(Mapa, Indice, [IndiceJogador, NovaQtd], MapaAtt),
     NovaQtdAdicoes is QtdAdicoes - Qtd,
     ( NovaQtdAdicoes > 0 -> 
-        menuAlocacaoTerritorios(MapaAtt, IndiceJogador, NovaQtdAdicoes, Objetivos, MapaFinal)
-    ;  
-        MapaFinal = MapaAtt, imprime_mapa_colorido(MapaFinal)
-    ). 
+        menuAlocacaoTerritorios(MapaAtt, IndiceJogador, NovaQtdAdicoes, Objetivos, MapaFinal);  
+        MapaFinal = MapaAtt, imprime_mapa_colorido(MapaFinal)). 
 
-lerQuantidade(QtdAdicoes, Qtd) :-
-    write('Quantos exercitos voce deseja adicionar?'), nl,
-    read_line_to_codes(user_input, Q),
-    string_codes(StringQ, Q),
-    atom_string(AtomQtd, StringQ),
-    atom_number(AtomQtd, QtdD),
-    ( verificaValidade(QtdD, QtdAdicoes) -> Qtd = QtdD
-    ; writeln('Entrada invalida!'), lerQuantidade(QtdAdicoes, Qtd) ). 
-
-lerTerritorio(Terr) :-
-    writeln('Digite o territorio ao qual voce deseja adicionar (em forma de sigla):'), 
-    read_line_to_string(user_input, Entrada),
-    ( pertenceMapa(Entrada)  -> Terr = Entrada  % Depois chamar tbm a função que verifica se terr é do jogador
-    ; writeln('Entrada invalida!'), lerTerritorio(Terr) ).  % Se inválido, chama recursivamente

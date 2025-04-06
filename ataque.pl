@@ -33,8 +33,11 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         repeat,
         writeln("Qual territorio voce deseja usar para atacar?"),
         read_line_to_string(user_input, Sigla), 
-        (pertenceMapa(Sigla)-> !; writeln("Entrada inválida :("), fail),
-        retornaIndice(Sigla, Terr),
+        (pertenceMapa(Sigla), 
+        retornaIndice(Sigla, Terr), 
+        jogQtdExercitos(Mapa, Terr, Qtd, _), Qtd > 1,
+        ehDoJogador(Mapa, Terr, IndiceJogador) -> !; 
+        writeln("Entrada inválida :("), fail),
         maxUtilExercitos(Mapa, Terr, Max),
         
         repeat,

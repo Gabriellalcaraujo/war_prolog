@@ -31,6 +31,7 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
             (pertenceMapa(SiglaAlvo),
             verificaAdjacencia(Terr, Alvo) -> ! ; 
             writeln("Entrada inválida :("), fail),
+            Movimentados is append(MovimentosFeitos, [Alvo]),
 
         repeat,
             maxUtilExercitos(Mapa, Terr, Max),
