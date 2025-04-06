@@ -1,4 +1,4 @@
-:- module(representacaoTerritorios, [imprime_mapa_colorido/1]).
+:- module(representacaoTerritorios, [imprime_mapa_colorido/1, define_cor/1, reset_color/0]).
 
 retornaSigla(Indice, Sigla):-
     Territorios =  ['AL', 'CA', 'GL', 'NY', 'MX', 'BR', 'AR', 'UK', 'GE', 'SP', 

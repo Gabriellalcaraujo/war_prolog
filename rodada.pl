@@ -4,11 +4,43 @@
 :- use_module(representacaoTerritorios).
 :- use_module(verificaObjetivos).
 :- use_module(mapeiaTerritorios).
+:- use_module(salvamento).
 
 verificaValidade(Qtd, QtdAdicoes):-
     Lista = [1,2,3,4,5],
     member(Qtd, Lista),
     Qtd =< QtdAdicoes.
+
+temTerritorio(_, []) :- false.
+temTerritorio(Jog, [[Jog, Terr] | _]) :- V \= 0, !.
+temTerritorio(Elem, [_ | Terr]) :- temTerritorio(Elem, Terr).
+
+primeiroJogador(Mapa, IndiceJogador, R):-
+    (temTerritorio -> R = IndiceJogador; Indc1 is IndiceJogador+1, primeiroJogador(Mapa, Indc1, R)).
+
+rodada(NumRodada, JogadoresInfo, Objetivos, IndiceJogador, Mapa, EraSalvo):-
+    NovoIndice is (IndiceJogador mod (JogadoresInfo)) +1,
+    (\+ temTerritorio -> rodada(NumRodada, JogadoresInfo, Objetivos, NovoIndice, Mapa, 0); 
+    (primeiroJogador(Mapa, IndiceJogador, R), IndiceJogador =:= R, NumRodada =\= 1, EraSalvo =:= 0 ->
+    repeat,
+    writeln("Voce deseja salvar e sair do jogo? Sim (1) Nao (0)"), 
+    read_line_to_string(user_input, D),
+    ( atom_number(D, N), number(N, [0,1]) -> !;   
+        writeln("Entrada inválida :("), fail ), 
+    (N =:= 1 ->
+    repeat,
+    writeln("Escreva o nome do arquivo no qual voce deseja salvar o jogo (obrigatorio ter .txt no fim)"),
+    read_line_to_string(user_input, NomeArquivo), salvarJogo([Mapa, JogadoresInfo, Objetivos, NumRodada, IndiceJogador], NomeArquivo);
+    define_cor(IndiceJogador), writeln("Vez do jogador ~w"), [IndiceJogador], reset_color),
+    )
+    
+    ),
+
+
+
+
+
+
 
 
 menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :-

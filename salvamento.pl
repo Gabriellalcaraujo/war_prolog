@@ -1,3 +1,5 @@
+:- module(salvamento, [salvarJogo/2, carregarJogo/2]).
+
 salvarJogo(EstadoDoJogo, NomeArquivo) :-
     open(NomeArquivo, append, Stream),  
     write(Stream, EstadoDoJogo),  
