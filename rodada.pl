@@ -32,7 +32,7 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
     (\+ temTerritorio(IndiceJogador, Mapa) ->
         rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, NovoIndice, Mapa, 0);
         
-        (primeiroJogador(Mapa, IndiceJogador, R),
+        (primeiroJogador(Mapa, 1, R),
             IndiceJogador =:= R,
             NumRodada =\= 1,
             EraSalvo =:= 0 ->
