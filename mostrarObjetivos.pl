@@ -1,4 +1,4 @@
-:- module(mostrarObjetivos, [retornaObjetivo/2, atribuir_objetivos/2, retornaObjetivoJog/2]).
+:- module(mostrarObjetivos, [retornaObjetivo/2, atribuir_objetivos/3, retornaObjetivoJog/2]).
 :- use_module(library(readutil)).
 :- use_module(library(random)).
 
@@ -20,18 +20,20 @@ embaralhar_objetivos(Shuffled) :-
     objetivos(List),
     random_permutation(List, Shuffled).
 
-atribuir_objetivos(Qtd, Shuffled) :-
+atribuir_objetivos(Qtd, QtdJogReais, Shuffled) :-
     embaralhar_objetivos(Objetivos),
     Shuffled = Objetivos,
     length(ObjetivosDistribuidos, Qtd), 
     append(ObjetivosDistribuidos, _, Shuffled),  
-    distribuir_objetivos(ObjetivosDistribuidos, 1). 
+    distribuir_objetivos(ObjetivosDistribuidos, QtdJogReais, 1).
 
-distribuir_objetivos([], _) :-
+distribuir_objetivos(_, Q, I) :-
+    Q < I,
     writeln("Todos os objetivos foram exibidos.").
 
-distribuir_objetivos([], _).
-distribuir_objetivos([H|T], Indice) :-
+distribuir_objetivos([], _, _).
+distribuir_objetivos([H|T], QtdReais, Indice) :-
+    QtdReais >= Indice,
     format('Pressione ENTER para verificar o objetivo do Jogador ~w.~n', [Indice]),
     get_char(_),
     limpar_tela,
@@ -41,7 +43,7 @@ distribuir_objetivos([H|T], Indice) :-
     get_char(_),
     limpar_tela,
     NovoIndice is Indice + 1,
-    distribuir_objetivos(T, NovoIndice).
+    distribuir_objetivos(T, QtdReais, NovoIndice).
 
 retornaObjetivoJog(IndiceJogador, IndiceObjetivo) :-
     objetivos(ListaObj),

@@ -1,4 +1,4 @@
-:- module(rodada, [menuAlocacaoTerritorios/5, rodada/7]).
+:- module(rodada, [menuAlocacaoTerritorios/5, rodada/7, ehBot/3]).
 :- use_module(distribuicaoTerritorios).
 :- use_module(mostrarObjetivos).
 :- use_module(representacaoTerritorios).
@@ -104,7 +104,7 @@ menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :
         writeln("Entrada inválida :("), fail),
     
     repeat,
-    write('Quantos exercitos voce deseja adicionar?'),
+    write('Quantos exercitos voce deseja adicionar?'), nl,
     read_line_to_string(user_input, Qtd),
     ( atom_number(Qtd, QtdAdd), verificaValidade(QtdAdd, QtdAdicoes) -> !; 
         writeln("Entrada inválida :("), fail ),

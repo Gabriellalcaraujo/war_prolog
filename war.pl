@@ -13,6 +13,6 @@ war:-
     QtdJog is QtdJogF + QtdBotsF,
     posicionamento_inicial(QtdJog, NovoMapa),
     mostrarObjetivos:retornaObjetivo(1, Objetivo),
-    atribuir_objetivos(QtdJog, Objetivos),
+    atribuir_objetivos(QtdJog, QtdJogF, Objetivos),
     imprime_mapa_colorido(NovoMapa), 
     rodada(1, QtdJog, QtdBotsF, Objetivos, 1, NovoMapa, 0).
