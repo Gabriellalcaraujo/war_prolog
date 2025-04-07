@@ -47,6 +47,7 @@ jogQtdExercitos(Mapa, Terr, Qtd, Jogador):-
 
 ehDoJogador(Mapa, Terr, Jogador):-
     nth1(Terr, Mapa, Sublista),
-    nth1(1, Sublista, Jogador).
+    nth1(1, Sublista, JogadorT),
+    Jogador =:= JogadorT.
 
 

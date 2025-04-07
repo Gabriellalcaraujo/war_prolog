@@ -31,7 +31,7 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
             (pertenceMapa(SiglaAlvo),
             verificaAdjacencia(Terr, Alvo) -> ! ; 
             writeln("Entrada inválida :("), fail),
-            Movimentados is append(MovimentosFeitos, [Alvo]),
+            append(MovimentosFeitos, [Alvo], Movimentados),
 
         repeat,
             maxUtilExercitos(Mapa, Terr, Max),
@@ -50,5 +50,5 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
 
         substituirSublista(Mapa, Terr, [Jogador, NovaQtdOrigem], MapaParcial),
         substituirSublista(MapaParcial, Alvo, [Jogador, NovaQtdDestino], NovoMapa),
-        inputMovimento(NovoMapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF);
+        inputMovimento(NovoMapa, Jogador, JogadoresInfo, Movimentados, Objetivos, MapaF);
         MapaF = Mapa, true).

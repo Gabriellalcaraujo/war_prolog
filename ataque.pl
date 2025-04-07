@@ -35,7 +35,7 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         read_line_to_string(user_input, Sigla), 
         (pertenceMapa(Sigla), 
         retornaIndice(Sigla, Terr), 
-        jogQtdExercitos(Mapa, Terr, Qtd, _), Qtd > 1,
+        jogQtdExercitos(Mapa, Terr, QtdE, _), QtdE > 1,
         ehDoJogador(Mapa, Terr, IndiceJogador) -> !; 
         writeln("Entrada inválida :("), fail),
         maxUtilExercitos(Mapa, Terr, Max),
@@ -54,13 +54,10 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         writeln("Entrada inválida :("), fail),
         jogQtdExercitos(Mapa, Alvo, QtdDef, _),
         min(QtdDef, R), QtdDados is QtdEx + R,
-        format("R: ~w~n", [R]), %log
-        format("QtdEx: ~w~n", [QtdEx]), %log
-        format("QtdDados: ~w~n", [QtdDados]), %log
         embaralhar_dados(QtdEx, QtdDados, DadosAtac, DadosDef),
         format("DADOS DE ATAQUE: ~w", [DadosAtac]), nl,
         format("DADOS DE DEFESA: ~w", [DadosDef]), nl, nl,
-        formataDados(DadosAtac, DadosDef, PerdasAtaq, PerdasDef), % Pensar em chamar calcula perdas dentro de dadosAtaque
+        formataDados(DadosAtac, DadosDef, PerdasAtaq, PerdasDef),
         
         format("O jogador atacante perdeu ~w exercitos", [PerdasAtaq]), nl,
         format("O jogador defensor perdeu ~w exercitos", [PerdasDef]), nl,
@@ -72,7 +69,7 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         repeat,
         format("Você conquistou o território! Quantos exércitos você deseja transferir? min: 1, max: ~w~n", [NovoMax]),
         read_line_to_string(user_input, QtdN),
-        (atom_number(QtdN, QtdTransf), QtdTransf =< NovoMax, QtdEx >= 1 -> !; 
+        (atom_number(QtdN, QtdTransf), QtdTransf =< NovoMax, QtdTransf >= 1 -> !; 
         writeln("Entrada inválida :("), fail),
         
         substituirSublista(NovoMapa, Alvo, [IndiceJogador, QtdTransf], MapaAtt),

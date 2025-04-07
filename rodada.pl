@@ -98,22 +98,21 @@ menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :
     format('Voce pode alocar ~w exercitos ~n', [QtdAdicoes]),
     
     repeat,
-    writeln('Digite o territorio ao qual voce deseja adicionar (em forma de sigla):'),
+    writeln('Digite o territorio ao qual voce deseja adicionar (em forma de sigla): '),
     read_line_to_string(user_input, Sigla),
-    (pertenceMapa(Sigla), retornaIndice(Sigla, Idc), ehDoJogador(Mapa, Terr, IndiceJogador)->!;
+    (pertenceMapa(Sigla), retornaIndice(Sigla, Idc), ehDoJogador(Mapa, Idc, IndiceJogador)->!;
         writeln("Entrada inválida :("), fail),
     
     repeat,
     write('Quantos exercitos voce deseja adicionar?'),
     read_line_to_string(user_input, Qtd),
-    ( atom_number(Qtd, QtdAdd), verificaOpcao(QtdAdd) -> !;   
+    ( atom_number(Qtd, QtdAdd), verificaValidade(QtdAdd, QtdAdicoes) -> !; 
         writeln("Entrada inválida :("), fail ),
 
-    retornaIndice(Terr, Indice),
-    nth1(Indice, Mapa, Sublista),
-    novaQtdExercitos(Sublista, Qtd, NovaQtd),
-    substituirSublista(Mapa, Indice, [IndiceJogador, NovaQtd], MapaAtt),
-    NovaQtdAdicoes is QtdAdicoes - Qtd,
+    nth1(Idc, Mapa, Sublista),
+    novaQtdExercitos(Sublista, QtdAdd, NovaQtd),
+    substituirSublista(Mapa, Idc, [IndiceJogador, NovaQtd], MapaAtt),
+    NovaQtdAdicoes is QtdAdicoes - QtdAdd,
     ( NovaQtdAdicoes > 0 -> 
         menuAlocacaoTerritorios(MapaAtt, IndiceJogador, NovaQtdAdicoes, Objetivos, MapaFinal);  
         MapaFinal = MapaAtt, imprime_mapa_colorido(MapaFinal)). 
