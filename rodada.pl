@@ -67,7 +67,7 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
                         rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaFinal, 0);
                         inputAtaque(MapaFinal, IndiceJogador, JogadoresInfo, Objetivos, MapaPosAtaq),
                         inputMovimento(MapaPosAtaq, IndiceJogador, JogadoresInfo, [], Objetivos, MapaPosMov),
-                        rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaPosMov, 0)));
+                        rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaPosMov, 0))));
 
             define_cor(IndiceJogador),
             format("Vez do jogador ~w~n", [IndiceJogador]),
@@ -87,7 +87,7 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
                     inputAtaque(MapaF, IndiceJogador, JogadoresInfo, Objetivos, MapaPosAtaq2),
                     inputMovimento(MapaPosAtaq2, IndiceJogador, JogadoresInfo, [], Objetivos, MapaPosMov2),
                     rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaPosMov2, 0))
-            )
+            
         )
     ).
 

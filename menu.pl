@@ -14,12 +14,6 @@ validaBots(QtdBots, Min, Q):- QtdBots >= Min, QtdBots =< Q.
 
 menu(QtdJogF, QtdBotsF):-
     repeat,
-    writeln("Voce deseja comecar um novo jogo (0) ou continuar um jogo salvo (1)?"),
-    read_line_to_string(user_input, D),
-    ( atom_number(D, N), verificaOpcao(N) -> !;   
-        writeln("Entrada inválida :("), fail 
-    ),
-    repeat,
     writeln("Quantos jogadores terao na partida? (1 a 4): "), 
     read_line_to_string(user_input, Qtd),
     ( atom_number(Qtd, QtdF), validaJogadores(QtdF) -> QtdJogF = QtdF, !;   

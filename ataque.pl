@@ -19,7 +19,7 @@ batalhaMapa(Mapa, PerdasAtaq, PerdasDef, Terr, Alvo, NovoMapa):-
 
 conquistouTerr(Mapa, Alvo):-
     jogQtdExercitos(Mapa, Alvo, QtdExercitos, _),
-    QtdExercitos =:= 0.
+    QtdExercitos =:= 0. 
 
 inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
     verificaObjetivosRec(Mapa, JogadoresInfo, Objetivos),
@@ -27,7 +27,7 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
     repeat,
         writeln("Você deseja atacar? (1)Sim (0)Não"),
         read_line_to_string(user_input, Entrada),
-        (atom_number(Entrada, N), verificaOpcao(X) -> !; 
+        (atom_number(Entrada, N), verificaOpcao(N) -> !; 
         writeln("Entrada inválida :("), fail),
     (N =:= 1 -> 
         repeat,
