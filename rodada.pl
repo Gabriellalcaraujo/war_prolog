@@ -1,4 +1,4 @@
-:- module(rodada, [menuAlocacaoTerritorios/5, rodada/7, ehBot/3]).
+:- module(rodada, [menuAlocacaoTerritorios/6, rodada/7, ehBot/3, temTerritorio/2]).
 :- use_module(distribuicaoTerritorios).
 :- use_module(mostrarObjetivos).
 :- use_module(representacaoTerritorios).
@@ -18,7 +18,6 @@ verificaValidade(Qtd, QtdAdicoes):-
     member(Qtd, Lista),
     Qtd =< QtdAdicoes.
 
-temTerritorio(_, []) :- false.
 temTerritorio(Jog, [[Jog, Terr] | _]) :- Terr \= 0, !.
 temTerritorio(Jog, [_ | Terr]) :- temTerritorio(Jog, Terr).
 
@@ -60,14 +59,14 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
                         rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaAloc, 0);
                         botJoga(MapaAloc, JogadoresInfo, IndiceJogador, Objetivos, NovoMapa),
                         rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, NovoMapa, 0));
-                        menuAlocacaoTerritorios(Mapa, IndiceJogador, 5, Objetivos, MapaFinal),
+                        menuAlocacaoTerritorios(Mapa, JogadoresInfo, IndiceJogador, 5, Objetivos, MapaFinal),
                         verificaObjetivosRec(MapaFinal, JogadoresInfo, Objetivos),
                     
                     (NumRodada =< JogadoresInfo ->
                         rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaFinal, 0);
                         inputAtaque(MapaFinal, IndiceJogador, JogadoresInfo, Objetivos, MapaPosAtaq),
                         inputMovimento(MapaPosAtaq, IndiceJogador, JogadoresInfo, [], Objetivos, MapaPosMov),
-                        rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaPosMov, 0))));
+                        rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaPosMov, 0)));
 
             define_cor(IndiceJogador),
             format("Vez do jogador ~w~n", [IndiceJogador]),
@@ -80,20 +79,19 @@ rodada(NumRodada, JogadoresInfo, QtdBots, Objetivos, IndiceJogador, Mapa, EraSal
                     botJoga(MapaAtt, JogadoresInfo, IndiceJogador, Objetivos, NovoMapaB),
                     rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, NovoMapaB, 0));
                     
-                menuAlocacaoTerritorios(Mapa, IndiceJogador, 5, Objetivos, MapaF),
+                menuAlocacaoTerritorios(Mapa, JogadoresInfo, IndiceJogador, 5, Objetivos, MapaF),
                 verificaObjetivosRec(MapaF, JogadoresInfo, Objetivos),
                 (NumRodada =< JogadoresInfo ->
                     rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaF, 0);
                     inputAtaque(MapaF, IndiceJogador, JogadoresInfo, Objetivos, MapaPosAtaq2),
                     inputMovimento(MapaPosAtaq2, IndiceJogador, JogadoresInfo, [], Objetivos, MapaPosMov2),
                     rodada(NumRodadaNovo, JogadoresInfo, QtdBots, Objetivos, NovoIndice, MapaPosMov2, 0))
-            
+            )
         )
     ).
 
-
-menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :-
-    verificaObjetivosRec(Mapa, IndiceJogador, Objetivos),
+menuAlocacaoTerritorios(Mapa, JogadoresInfo, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :-
+    verificaObjetivosRec(Mapa, JogadoresInfo, Objetivos),
     imprime_mapa_colorido(Mapa),
     format('Voce pode alocar ~w exercitos ~n', [QtdAdicoes]),
     
@@ -114,6 +112,7 @@ menuAlocacaoTerritorios(Mapa, IndiceJogador, QtdAdicoes, Objetivos, MapaFinal) :
     substituirSublista(Mapa, Idc, [IndiceJogador, NovaQtd], MapaAtt),
     NovaQtdAdicoes is QtdAdicoes - QtdAdd,
     ( NovaQtdAdicoes > 0 -> 
-        menuAlocacaoTerritorios(MapaAtt, IndiceJogador, NovaQtdAdicoes, Objetivos, MapaFinal);  
-        MapaFinal = MapaAtt, imprime_mapa_colorido(MapaFinal)). 
+        menuAlocacaoTerritorios(MapaAtt, JogadoresInfo, IndiceJogador, NovaQtdAdicoes, Objetivos, MapaFinal);  
+        MapaFinal = MapaAtt, imprime_mapa_colorido(MapaFinal)).
+
 

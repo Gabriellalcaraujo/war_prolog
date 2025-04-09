@@ -44,7 +44,7 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         writeln("Qual territorio voce deseja invadir?"),
         read_line_to_string(user_input, SiglaAlvo), 
         retornaIndice(SiglaAlvo, Alvo), 
-        (pertenceMapa(SiglaAlvo), verificaAdjacencia(Terr, Alvo) -> !; 
+        (pertenceMapa(SiglaAlvo), verificaAdjacencia(Terr, Alvo), \+ ehDoJogador(Mapa, Alvo, IndiceJogador) -> !; 
         writeln("Entrada inválida :("), fail),
         
         repeat,

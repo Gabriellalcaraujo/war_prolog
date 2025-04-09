@@ -27,8 +27,7 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
         repeat,
             writeln("E para qual território deseja transferir?"),
             read_line_to_string(user_input, SiglaAlvo),
-            retornaIndice(SiglaAlvo, Alvo),
-            (pertenceMapa(SiglaAlvo),
+            (pertenceMapa(SiglaAlvo), retornaIndice(SiglaAlvo, Alvo),
             verificaAdjacencia(Terr, Alvo) -> ! ; 
             writeln("Entrada inválida :("), fail),
             append(MovimentosFeitos, [Alvo], Movimentados),
