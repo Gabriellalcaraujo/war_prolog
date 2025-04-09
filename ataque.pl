@@ -30,22 +30,20 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         (atom_number(Entrada, N), verificaOpcao(N) -> !; 
         writeln("Entrada inválida :("), fail),
     (N =:= 1 -> 
-        repeat,
         writeln("Qual territorio voce deseja usar para atacar?"),
         read_line_to_string(user_input, Sigla), 
         (pertenceMapa(Sigla), 
         retornaIndice(Sigla, Terr), 
         jogQtdExercitos(Mapa, Terr, QtdE, _), QtdE > 1,
         ehDoJogador(Mapa, Terr, IndiceJogador) -> !; 
-        writeln("Entrada inválida :("), fail),
+        writeln("Entrada inválida :("), inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF)),
         maxUtilExercitos(Mapa, Terr, Max),
         
-        repeat,
         writeln("Qual territorio voce deseja invadir?"),
         read_line_to_string(user_input, SiglaAlvo), 
         retornaIndice(SiglaAlvo, Alvo), 
         (pertenceMapa(SiglaAlvo), verificaAdjacencia(Terr, Alvo), \+ ehDoJogador(Mapa, Alvo, IndiceJogador) -> !; 
-        writeln("Entrada inválida :("), fail),
+        writeln("Entrada inválida :("), inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF)),
         
         repeat,
         format("Com quantos exercitos voce deseja atacar? min:1, max: ~w", [Max]), nl,

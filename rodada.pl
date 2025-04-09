@@ -113,6 +113,6 @@ menuAlocacaoTerritorios(Mapa, JogadoresInfo, IndiceJogador, QtdAdicoes, Objetivo
     NovaQtdAdicoes is QtdAdicoes - QtdAdd,
     ( NovaQtdAdicoes > 0 -> 
         menuAlocacaoTerritorios(MapaAtt, JogadoresInfo, IndiceJogador, NovaQtdAdicoes, Objetivos, MapaFinal);  
-        MapaFinal = MapaAtt, imprime_mapa_colorido(MapaFinal)).
+        MapaFinal = MapaAtt).
 
 

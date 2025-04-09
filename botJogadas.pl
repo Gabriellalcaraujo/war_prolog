@@ -3,8 +3,10 @@
 :- use_module(utilsAtaque).
 :- use_module(ataque).
 :- use_module(distribuicaoTerritorios).
+:- use_module(verificaObjetivos).
 
 botJoga(Mapa, JogInfo, IndiceJogador, Objetivos, NovoMapa) :-
+    verificaObjetivosRec(Mapa, JogInfo, Objetivos),
     possibilidadesDeAtaque(Mapa, IndiceJogador, Possibilidades),
     ( Possibilidades == [] -> 
         format("O jogador ~w passou a vez.~n", [IndiceJogador]), 
@@ -32,19 +34,19 @@ botAtaque(Mapa, IndiceJogador, Ataque, Objetivos, MapaF) :-
     nth0(0, Ataque, Atacante),
     writeln(Atacante), %log check
     nth0(1, Ataque, Atacado),
-    writeln(Atacado), %log check
+    % writeln(Atacado), %log check
     maxUtilExercitos(Mapa, Atacante, Max),
-    writeln(Max), %log check
+    % writeln(Max), %log check
     nth1(Atacado, Mapa, TerrAtacado),
-    writeln(TerrAtacado), %log check
+    % writeln(TerrAtacado), %log check
     nth0(1, TerrAtacado, QtdTerrDef),
-    writeln(QtdTerrDef), %log check
+    % writeln(QtdTerrDef), %log check
     min(QtdTerrDef, QtdDef),
-    writeln(QtdDef), %log
+    % writeln(QtdDef), %log
     random_between(1, Max, QtdAtaque),
-    writeln(QtdAtaque), %log
+    % writeln(QtdAtaque), %log
     QtdDados is QtdAtaque + QtdDef,
-    writeln(QtdDados), %log,
+    % writeln(QtdDados), %log,
     retornaSigla(Atacante, SiglaAtacante),
     retornaSigla(Atacado, SiglaAtacado),
     format("O jogador ~w usou o território ~w para atacar o território ~w utilizando ~w exércitos.~n", [IndiceJogador, SiglaAtacante, SiglaAtacado, QtdAtaque]),
@@ -83,7 +85,7 @@ botAloca(Mapa, IndiceJogador, QtdRestante, NovoMapa) :-
             NovaQtd is QtdAntiga + Qtd,
             substituirSublista(Mapa, Territorio, [IndiceJogador, NovaQtd], MapaAtualizado),
             NovaQtdRestante is QtdRestante - Qtd,
-            botAloca(MapaAtualizado, IndiceJogador, NovaQtdRestante, NovoMapa)
+            botAloca(MapaAtualizado, IndiceJogador, NovaQtdRestante, NovoMapa),
     ).
 
     
