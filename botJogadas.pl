@@ -85,7 +85,7 @@ botAloca(Mapa, IndiceJogador, QtdRestante, NovoMapa) :-
             NovaQtd is QtdAntiga + Qtd,
             substituirSublista(Mapa, Territorio, [IndiceJogador, NovaQtd], MapaAtualizado),
             NovaQtdRestante is QtdRestante - Qtd,
-            botAloca(MapaAtualizado, IndiceJogador, NovaQtdRestante, NovoMapa),
+            botAloca(MapaAtualizado, IndiceJogador, NovaQtdRestante, NovoMapa)
     ).
 
     

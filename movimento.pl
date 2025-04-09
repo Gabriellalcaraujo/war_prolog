@@ -16,13 +16,13 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
         read_line_to_string(user_input, Entrada),
         (atom_number(Entrada, N),
           member(N, [0, 1]) -> ! ; 
-          writeln("Entrada inválida :("), fail),
-    (N =:= 1 ->
+          writeln("Entrada inválida :("), fail), !,
+    (N =:= 0 -> MapaF = Mapa;
 
             writeln("De qual território você deseja transferir os exércitos?"),
             read_line_to_string(user_input, Sigla),
             (pertenceMapa(Sigla), retornaIndice(Sigla, Terr), 
-            ehDoJogador(Mapa, Alvo, Jogador), \+ movimentoJaRealizado(Terr, MovimentosFeitos), 
+            ehDoJogador(Mapa, Terr, Jogador), \+ movimentoJaRealizado(Terr, MovimentosFeitos), 
             jogQtdExercitos(Mapa, Terr, Qtd, _), Qtd > 1 -> 
                 true ; 
                 writeln("Entrada inválida :("), 
@@ -32,19 +32,19 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
             read_line_to_string(user_input, SiglaAlvo),
             (pertenceMapa(SiglaAlvo), retornaIndice(SiglaAlvo, Alvo),
             verificaAdjacencia(Terr, Alvo), ehDoJogador(Mapa, Alvo, Jogador), Terr =\= Alvo -> 
-                true ; 
+                append(MovimentosFeitos, [Alvo], Movimentados) ; 
                 writeln("Entrada inválida :("), 
                 inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)),
-                append(MovimentosFeitos, [Alvo], Movimentados),
+                
         
             repeat,
             maxUtilExercitos(Mapa, Terr, Max),
             format("Quantos exércitos serão transferidos? (min: 1, max: ~w)~n", [Max]),
-            read_line_to_string(user_input, Qtd),
-            (atom_number(Qtd, QtdEx),
+            read_line_to_string(user_input, QtdN),
+            (atom_number(QtdN, QtdEx),
             QtdEx =< Max,
             QtdEx >= 1 -> ! ;
-            writeln("Entrada inválida :("), fail),
+            writeln("Entrada inválida :("), fail), !,
 
         jogQtdExercitos(Mapa, Terr, QtdOrigem, Jogador),
         jogQtdExercitos(Mapa, Alvo, QtdDestino, Jogador),
@@ -54,5 +54,4 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
 
         substituirSublista(Mapa, Terr, [Jogador, NovaQtdOrigem], MapaParcial),
         substituirSublista(MapaParcial, Alvo, [Jogador, NovaQtdDestino], NovoMapa),
-        inputMovimento(NovoMapa, Jogador, JogadoresInfo, Movimentados, Objetivos, MapaF);
-        MapaF = Mapa, true).
+        inputMovimento(NovoMapa, Jogador, JogadoresInfo, Movimentados, Objetivos, MapaF)).

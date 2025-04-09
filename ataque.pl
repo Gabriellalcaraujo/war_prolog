@@ -27,9 +27,9 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
     repeat,
         writeln("Você deseja atacar? (1)Sim (0)Não"),
         read_line_to_string(user_input, Entrada),
-        (atom_number(Entrada, N), verificaOpcao(N) -> !; 
-        writeln("Entrada inválida :("), fail),
-    (N =:= 1 -> 
+        (atom_number(Entrada, N), verificaOpcao(N) -> true; 
+        writeln("Entrada inválida :("), fail), !, 
+    (N =:= 0 -> MapaF = Mapa, !;
         writeln("Qual territorio voce deseja usar para atacar?"),
         read_line_to_string(user_input, Sigla), 
         (pertenceMapa(Sigla), 
@@ -40,9 +40,9 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         maxUtilExercitos(Mapa, Terr, Max),
         
         writeln("Qual territorio voce deseja invadir?"),
-        read_line_to_string(user_input, SiglaAlvo), 
-        retornaIndice(SiglaAlvo, Alvo), 
-        (pertenceMapa(SiglaAlvo), verificaAdjacencia(Terr, Alvo), \+ ehDoJogador(Mapa, Alvo, IndiceJogador) -> !; 
+        read_line_to_string(user_input, SiglaAlvo),  
+        (pertenceMapa(SiglaAlvo), retornaIndice(SiglaAlvo, Alvo), 
+        verificaAdjacencia(Terr, Alvo), \+ ehDoJogador(Mapa, Alvo, IndiceJogador) -> !; 
         writeln("Entrada inválida :("), inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF)),
         
         repeat,
@@ -50,6 +50,7 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         read_line_to_string(user_input, Qtd),
         (atom_number(Qtd, QtdEx), QtdEx =< Max, QtdEx >= 1 -> !; 
         writeln("Entrada inválida :("), fail),
+
         jogQtdExercitos(Mapa, Alvo, QtdDef, _),
         min(QtdDef, R), QtdDados is QtdEx + R,
         embaralhar_dados(QtdEx, QtdDados, DadosAtac, DadosDef),
@@ -60,7 +61,6 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         format("O jogador atacante perdeu ~w exercitos", [PerdasAtaq]), nl,
         format("O jogador defensor perdeu ~w exercitos", [PerdasDef]), nl,
         batalhaMapa(Mapa, PerdasAtaq, PerdasDef, Terr, Alvo, NovoMapa),
-        writeln(NovoMapa),
         maxUtilExercitos(NovoMapa, Terr, NovoMax),
     
         (conquistouTerr(NovoMapa, Alvo)->
@@ -75,8 +75,7 @@ inputAtaque(Mapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF):-
         NovaQtdE is QtdExercitos - QtdTransf,
         substituirSublista(MapaAtt, Terr, [IndiceJogador, NovaQtdE], MapaAtt2),
         inputAtaque(MapaAtt2, IndiceJogador, JogadoresInfo, Objetivos,  MapaF);
-        inputAtaque(NovoMapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF));
-        MapaF = Mapa, true).
+        inputAtaque(NovoMapa, IndiceJogador, JogadoresInfo, Objetivos, MapaF))).
     
 
 
