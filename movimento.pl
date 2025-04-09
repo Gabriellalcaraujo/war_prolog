@@ -18,18 +18,18 @@ inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)
           member(N, [0, 1]) -> ! ; 
           writeln("Entrada inválida :("), fail),
     (N =:= 1 ->
-        repeat,
+
             writeln("De qual território você deseja transferir os exércitos?"),
             read_line_to_string(user_input, Sigla),
-            (pertenceMapa(Sigla), retornaIndice(Sigla, Terr), \+ movimentoJaRealizado(Terr, MovimentosFeitos) -> ! ; 
-            writeln("Entrada inválida :("), fail),
+            (pertenceMapa(Sigla), retornaIndice(Sigla, Terr), ehDoJogador(Mapa, Alvo, Jogador),
+            \+ movimentoJaRealizado(Terr, MovimentosFeitos), jogQtdExercitos(Mapa, Terr, Qtd, _), Qtd > 1 -> true ; 
+            writeln("Entrada inválida :("), inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)),
 
-        repeat,
             writeln("E para qual território deseja transferir?"),
             read_line_to_string(user_input, SiglaAlvo),
             (pertenceMapa(SiglaAlvo), retornaIndice(SiglaAlvo, Alvo),
-            verificaAdjacencia(Terr, Alvo) -> ! ; 
-            writeln("Entrada inválida :("), fail),
+            verificaAdjacencia(Terr, Alvo), ehDoJogador(Mapa, Alvo, Jogador) -> true ; 
+            writeln("Entrada inválida :("), inputMovimento(Mapa, Jogador, JogadoresInfo, MovimentosFeitos, Objetivos, MapaF)),
             append(MovimentosFeitos, [Alvo], Movimentados),
 
         repeat,
