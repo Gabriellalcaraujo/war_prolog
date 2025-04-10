@@ -36,21 +36,13 @@ botJoga(Mapa, JogInfo, IndiceJogador, Objetivos, NovoMapa) :-
 
 botAtaque(Mapa, IndiceJogador, Ataque, Objetivos, MapaF) :-
     nth0(0, Ataque, Atacante),
-    writeln(Atacante), %log check
     nth0(1, Ataque, Atacado),
-    % writeln(Atacado), %log check
     maxUtilExercitos(Mapa, Atacante, Max),
-    % writeln(Max), %log check
     nth1(Atacado, Mapa, TerrAtacado),
-    % writeln(TerrAtacado), %log check
     nth0(1, TerrAtacado, QtdTerrDef),
-    % writeln(QtdTerrDef), %log check
     min(QtdTerrDef, QtdDef),
-    % writeln(QtdDef), %log
     random_between(1, Max, QtdAtaque),
-    % writeln(QtdAtaque), %log
     QtdDados is QtdAtaque + QtdDef,
-    % writeln(QtdDados), %log,
     retornaSigla(Atacante, SiglaAtacante),
     retornaSigla(Atacado, SiglaAtacado),
     format("O jogador ~w usou o território ~w para atacar o território ~w utilizando ~w exércitos.~n", [IndiceJogador, SiglaAtacante, SiglaAtacado, QtdAtaque]),
