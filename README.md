@@ -1,6 +1,6 @@
 # War_prolog
 
-O projeto, desenvolvido em **prolog**, consiste em um jogo de estratégia baseado do clássico War. O jogo permite partidas com até 4 jogadores, que podem ser tanto humanos, quando bots (nesse caso, no máximo 3, pois deve haver, no mínimo, um jogador real em cada partida), e segue um sistema de rodadas, nas quais os jogadores devem fortaleces os seus territórios e conquistar outros, a fim de alcançarem os seus objetivos.
+O projeto, desenvolvido em **prolog**, consiste em um jogo de estratégia baseado do clássico War. O jogo permite partidas com até 4 jogadores, que podem ser tanto humanos, quanto bots (nesse caso, no máximo 3, pois deve haver, no mínimo, um jogador real em cada partida), e segue um sistema de rodadas, nas quais os jogadores devem fortalecer os seus territórios e conquistar outros, a fim de alcançarem os seus objetivos.
 
 
 ## Mapa
@@ -44,7 +44,7 @@ O jogo pode ser salvo no início de cada rodada, permitindo que seja retomado de
 
 1.1 BOTS: você pode escolher bots para jogar também, só não é permitido jogar exclusivamente com bots, pelo menos um dos jogadores deve ser real.
 
-2.  INÍCIO DO JOGO: depois do menu inicial, os territórios são divididos aleatoriamente entre os jogadores, cada jogador vai receber "24 / quantidade de jogadores" territórios com 1 exército em cada um deles.
+2.  INÍCIO DO JOGO: depois do menu inicial, os territórios são divididos aleatoriamente entre os jogadores, cada jogador vai receber "24 / quantidade de jogadores" territórios, com 1 exército em cada um deles.
     
 3.  RODADA DE ALOCAÇÃO: na primeira rodada, cada jogador vai receber 5 exércitos e pode colocá-los em territórios que o pertencem da forma que escolher.
     
@@ -54,15 +54,17 @@ O jogo pode ser salvo no início de cada rodada, permitindo que seja retomado de
     
     4.2: ATAQUE: após a alocação, cada jogador vai poder atacar, para atacar, o jogador seleciona um território pertencente a ele e um território vizinho (ver ponto 5) pertencente a outro jogador. O jogador deve escolher quantos exércitos ele vai usar para atacar o vizinho, o mínimo é 1 e máximo é 3, no entanto, você só pode atacar caso o seu território vá ficar com pelo menos 1 exército sobrando após o ataque, portanto, não se pode atacar se seu território possuir apenas 1 exército e, caso tenha apenas 2 ou 3, só poderá usar, respectivamente, 1 ou 2 para o ataque. O jogador pode atacar quantas vezes quiser desde que tenha exércitos suficientes para isso.
     
-    4.2.1: DADOS: a decisão de se o ataque foi bem sucedido ou não é através de dados, o atacante vai jogar a quantidade de dados referente à quantidade de exércitos que ele usou para atacar, já o defensor vai jogar a quantidade de dados referente à quantidade total de exércitos que ele possui no território atacado (máximo de 3 dados), a partir disso, os dados são comparados 1 a 1, da seguinte forma: "maior dado de ataque x maior dado de defesa; segundo maior de ataque x segundo maior de defesa; ..." a cada comparação, um dos exércitos vai ser eliminado, aquele que tem o menor dado vai perder um exército, em caso de empate o território defensor tem vantagem. Caso a quantidade de dados seja desigual, serão considerados apenas os maiores dados do lado que tiver mais.
+    4.2.1: DADOS: a decisão de se o ataque foi bem sucedido ou não é através de dados, o atacante vai jogar a quantidade de dados referente à quantidade de exércitos que ele usou para atacar, já o defensor vai jogar a quantidade de dados referente à quantidade total de exércitos que ele possui no território atacado (máximo de 3 dados), a partir disso, os dados são comparados 1 a 1, da seguinte forma: "maior dado de ataque x maior dado de defesa; segundo maior de ataque x segundo maior de defesa; ..." a cada comparação, um dos exércitos vai ser eliminado, aquele que tem o menor dado vai perder um exército, em caso de empate o território defensor tem vantagem. Caso a quantidade de dados seja desigual, serão considerados apenas os maiores dados do jogador que tiver mais.
     
-    4.2.2: CONQUISTA: caso o território alvo perca todos os exércitos, o atacante pode transferir de 1 a 3 exércitos do território atacante para o seu novo território, mas claro que ele não pode deixar seu território original com menos de 1 exército.
+    4.2.2: CONQUISTA: caso o território alvo perca todos os exércitos, o atacante conquistou o território e pode transferir de 1 a 3 exércitos do território atacante para o seu novo território, mas claro que ele não pode deixar seu território original com menos de 1 exército.
     
     4.3: MOVIMENTO: após terminar seus ataques, o jogador terá a opção de mover exércitos para territórios vizinhos que também pertencem a ele, respeitando o máximo de 3 exércitos por movimento e respeitando que não pode deixar um território seu com menos de 1 exército. Além disso, há outra restrição, caso o jogador mova exércitos de A para B, ele não pode realizar nenhum movimento partindo de B para qualquer outro território naquela rodada. Respeitando essas regras, o jogador pode mover quantas vezes for necessário na rodada.
     
-5.  VIZINHANÇAS: os territórios considerados vizinhos e que podem interagir diretamente, em formato de lista de adjacência: AL : (NA, VL)
-    
+5.  VIZINHANÇAS: os territórios considerados vizinhos e que podem interagir diretamente, em formato de lista de adjacência: 
+
 ````
+AL : (NA, VL)
+    
 NA : (AL, MX, NY, GL)
 
 GL : (UK, NA, NY)
@@ -110,6 +112,6 @@ AU : (NZ, VI)
 NZ : (AU)
 ````
 
-6.  OBJETIVOS: no início de cada partida, cada jogador recebe um objetivo diferente dentre os 7 disponíveis, o jogo checa a cada ação relevante se algum dos objetivos foram cumpridos, aquele que cumpre seu objetivo ganha o jogo e ele se encerra imediatamente.
+6.  OBJETIVOS: no início de cada partida, cada jogador recebe um objetivo diferente dentre os 7 disponíveis, o jogo checa a cada ação relevante se algum dos objetivos foi cumprido, aquele que cumpre seu objetivo ganha o jogo e ele se encerra imediatamente.
     
     6.1: objetivos existentes: eliminar o jogador 2 ou (caso o jogador 2 o receba), conquistar 14 territórios conquistar 14 territórios conquistar 12 territórios tendo 2 ou mais exércitos em cada um conquistar América e Europa inteiras conquistar América e Oceania inteiras conquistar Ásia e Europa inteiras conquistar Europa, Oceania e África inteiras
