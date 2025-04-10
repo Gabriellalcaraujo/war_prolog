@@ -4,17 +4,20 @@
 :- use_module(ataque).
 :- use_module(distribuicaoTerritorios).
 :- use_module(verificaObjetivos).
+:- use_module(representacaoTerritorios).
 
 botJoga(Mapa, JogInfo, IndiceJogador, Objetivos, NovoMapa) :-
     verificaObjetivosRec(Mapa, JogInfo, Objetivos),
     possibilidadesDeAtaque(Mapa, IndiceJogador, Possibilidades),
     ( Possibilidades == [] -> 
         format("O jogador ~w passou a vez.~n", [IndiceJogador]), 
+        imprime_mapa_colorido(Mapa),
         NovoMapa = Mapa
     ; 
         random_member(Acao, [passar, atacar]),
         ( Acao == passar -> 
             format("O jogador ~w decidiu passar a vez.~n", [IndiceJogador]), 
+            imprime_mapa_colorido(Mapa),
             NovoMapa = Mapa
         ;   
             format("O jogador ~w decidiu atacar.~n", [IndiceJogador]),
@@ -22,7 +25,8 @@ botJoga(Mapa, JogInfo, IndiceJogador, Objetivos, NovoMapa) :-
             botAtaque(Mapa, IndiceJogador, Ataque, Objetivos, MapaAposAtaque),
             possibilidadesDeAtaque(MapaAposAtaque, IndiceJogador, NovasPossibilidades),
             ( NovasPossibilidades == [] -> 
-                format("O jogador ~w não tem mais ataques disponíveis e passou a vez.~n", [IndiceJogador]), 
+                format("O jogador ~w não tem mais ataques disponíveis e passou a vez.~n", [IndiceJogador]),
+                imprime_mapa_colorido(Mapa),
                 NovoMapa = MapaAposAtaque
             ;   
                 botJoga(MapaAposAtaque, JogInfo, IndiceJogador, Objetivos, NovoMapa)
@@ -73,6 +77,7 @@ botAtaque(Mapa, IndiceJogador, Ataque, Objetivos, MapaF) :-
 botAloca(Mapa, IndiceJogador, QtdRestante, NovoMapa) :-
     (
         QtdRestante =:= 0 ->
+            imprime_mapa_colorido(Mapa),
             NovoMapa = Mapa
         ;
             findall(Index, (nth1(Index, Mapa, [IndiceJogador, _])), Indices),
