@@ -37,10 +37,6 @@ formataDados(L1, L2, PerdasAtaq, PerdasDef):-
     take(L2, R1, L2F, _), calculaPerdas(L1, L2F, PerdasAtaq, PerdasDef);
     take(L1, R2, L1F, _), calculaPerdas(L1F, L2, PerdasAtaq, PerdasDef)).
 
-addZeros(L, QtdZeros, Lfinal):-
-    length(Aux, QtdZeros),
-    maplist(=(0), Aux),
-    append(L, Aux, Lnova).
 
 % O resto da lista importa paga pegarmos os dados do defensor
 take(L, QtdTake, Lfinal, Resto):-
@@ -62,7 +58,3 @@ calculaPerdas([H|T], [H2|T2], PerdasAtaq, PerdasDef):-
     calculaPerdas(T, T2, PerdasAtaq2, PerdasDef),
     PerdasAtaq is PerdasAtaq2+1.
 
-main3:- 
-    embaralhar_dados(3, 6, D1, D2),
-    format("Dados de ataque: ~w~n", [D1]),
-    format("Dados de defesa: ~w~n", [D2]).
